@@ -16,6 +16,10 @@ Unzip the `src` folder and open a terminal in `src` and execute the following co
 
 `pod install`
 
+> 💁‍♂️ *Heads up*: 
+> 
+> If you get an error running `pod install`, you'll need to first run this command: `sudo gem install cocoapods`. Once completed, you can run `pod install`.
+
 Then, open `src/pwa-shell.xcworkspace`
 
 This will open the project in Xcode. In Xcode, click the `Product` > `Build` to build your project.
@@ -29,6 +33,10 @@ With the project opened in Xcode, click ▶️ to run your PWA in an iPhone emul
 Your app is ready to be uploaded to the iOS App Store.
 
 Follow [Apple's instructions](https://developer.apple.com/ios/submit/) for submitting your app to the Store.
+
+## How can I tell if my PWA was launched from the iOS app?
+
+At runtime, your PWA will have a `app-platform` cookie. This cookie's value will be set to `iOS App Store`.
 
 ## Need more help?
 

@@ -42,6 +42,7 @@ namespace Microsoft.PWABuilder.IOS.Web
             services.AddTransient<TempDirectory>();
             services.AddTransient<ImageGenerator>();
             services.AddTransient<SourceCodeUpdater>();
+            services.AddTransient<AnalyticsService>();
             services.AddTransient<IOSPackageCreator>();
             services.AddHttpClient();
             services.AddControllers();
@@ -56,11 +57,11 @@ namespace Microsoft.PWABuilder.IOS.Web
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Microsoft.PWABuilder.IOS.Web v1"));
             }
 
+            app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStaticFiles();

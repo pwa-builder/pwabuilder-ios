@@ -54,7 +54,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
                 await this.imageGenerator.Generate(options, WebAppManifestContext.From(options.Manifest, options.ManifestUri), outputDir);
 
                 // Zip it all up.
-                var zipFile = await CreateZip(outputDir);
+                var zipFile = CreateZip(outputDir);
                 return await File.ReadAllBytesAsync(zipFile);
             }
             catch (Exception error)
@@ -68,7 +68,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             }
         }
 
-        private async Task<string> CreateZip(string outputDir)
+        private string CreateZip(string outputDir)
         {
             var zipFilePath = temp.CreateFile();
             using var zipFile = File.Create(zipFilePath);

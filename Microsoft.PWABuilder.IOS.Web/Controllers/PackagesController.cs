@@ -15,21 +15,33 @@ namespace Microsoft.PWABuilder.IOS.Web.Controllers
     {
         private readonly ILogger<PackagesController> logger;
         private readonly IOSPackageCreator packageCreator;
+        private readonly AnalyticsService analytics;
 
         public PackagesController(
             IOSPackageCreator packageCreator,
+            AnalyticsService analytics,
             ILogger<PackagesController> logger)
         {
             this.packageCreator = packageCreator;
+            this.analytics = analytics;
             this.logger = logger;
         }
 
         [HttpPost]
         public async Task<FileResult> Create(IOSAppPackageOptions options)
         {
-            var optionsValidated = ValidateOptions(options);
-            var packageBytes = await packageCreator.Create(optionsValidated);     
-            return File(packageBytes, "application/zip", $"{options.Name}-ios-app-package.zip");
+            try
+            {
+                var optionsValidated = ValidateOptions(options);
+                var packageBytes = await packageCreator.Create(optionsValidated);
+                analytics.Record(optionsValidated.Url.ToString(), success: true, error: null);
+                return File(packageBytes, "application/zip", $"{options.Name}-ios-app-package.zip");
+            }
+            catch (Exception error)
+            {
+                analytics.Record(options.Url ?? "https://EMPTY_URL", success: false, error: error.ToString());
+                throw;
+            }
         }
 
         private IOSAppPackageOptions.Validated ValidateOptions(IOSAppPackageOptions options)

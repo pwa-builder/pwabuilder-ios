@@ -10,5 +10,6 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
         public string SourceCodeZipPath { get; set; } = string.Empty;
         public string NextStepsPath { get; set; } = string.Empty;
         public string ImageGeneratorApiUrl { get; set; } = string.Empty;
+        public string AnalyticsUrl { get; set; } = string.Empty;
     }
 }
