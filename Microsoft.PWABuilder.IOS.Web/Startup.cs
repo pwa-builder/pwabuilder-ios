@@ -18,6 +18,8 @@ namespace Microsoft.PWABuilder.IOS.Web
 {
     public class Startup
     {
+        private readonly string AllowedOriginsPolicyName = "allowedOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +31,14 @@ namespace Microsoft.PWABuilder.IOS.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: AllowedOriginsPolicyName, builder => builder
+                    .SetIsOriginAllowed(CheckAllowedOriginCors)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
+
             services.AddTransient<TempDirectory>();
             services.AddTransient<ImageGenerator>();
             services.AddTransient<SourceCodeUpdater>();
@@ -61,6 +71,24 @@ namespace Microsoft.PWABuilder.IOS.Web
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private bool CheckAllowedOriginCors(string origin)
+        {
+            var allowedOrigins = new[]
+            {
+                "https://www.pwabuilder.com",
+                "https://pwabuilder.com",
+                "https://preview.pwabuilder.com",
+                "https://localhost:3333",
+                "https://localhost:3000",
+                "http://localhost:3333",
+                "http://localhost:3000",
+                "https://localhost:8000",
+                "http://localhost:8000",
+                "https://nice-field-047c1420f.azurestaticapps.net"
+            };
+            return allowedOrigins.Any(o => origin.Contains(o, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.PWABuilder.IOS.Web.Models;
+using Microsoft.PWABuilder.IOS.Web.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -53,7 +54,8 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
                 await this.imageGenerator.Generate(options, WebAppManifestContext.From(options.Manifest, options.ManifestUri), outputDir);
 
                 // Zip it all up.
-                return await CreateZipBytes(outputDir);
+                var zipFile = await CreateZip(outputDir);
+                return await File.ReadAllBytesAsync(zipFile);
             }
             catch (Exception error)
             {
@@ -66,11 +68,14 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             }
         }
 
-        private Task<byte[]> CreateZipBytes(string outputDir)
+        private async Task<string> CreateZip(string outputDir)
         {
-            var zipFile = temp.CreateFile();
-            ZipFile.CreateFromDirectory(outputDir, zipFile);
-            return File.ReadAllBytesAsync(zipFile);
+            var zipFilePath = temp.CreateFile();
+            using var zipFile = File.Create(zipFilePath);
+            using var zipArchive = new ZipArchive(zipFile, ZipArchiveMode.Create);
+            zipArchive.CreateEntryFromFile(appSettings.NextStepsPath, "next-steps.html");
+            zipArchive.CreateEntryFromDirectory(outputDir, "src");
+            return zipFilePath;
         }
     }
 }
