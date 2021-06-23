@@ -23,13 +23,13 @@ namespace Microsoft.PWABuilder.IOS.Web.Common
                 var files = Directory.GetFiles(directory);
                 foreach (var file in files)
                 {
-                    zip.CreateEntryFromFile(file, $"{entryName}\\{Path.GetFileName(file)}");
+                    zip.CreateEntryFromFile(file, $"{entryName}/{Path.GetFileName(file)}");
                 }
 
                 var directories = Directory.GetDirectories(directory);
                 foreach (var subDirectory in directories)
                 {
-                    var dirEntryName = $"{entryName}\\{new DirectoryInfo(subDirectory).Name}";
+                    var dirEntryName = $"{entryName}/{new DirectoryInfo(subDirectory).Name}";
                     zip.CreateEntryFromDirectory(subDirectory, dirEntryName);
                 }
             }

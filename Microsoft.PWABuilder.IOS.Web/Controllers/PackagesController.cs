@@ -28,7 +28,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Controllers
         public async Task<FileResult> Create(IOSAppPackageOptions options)
         {
             var optionsValidated = ValidateOptions(options);
-            var packageBytes = await packageCreator.Create(optionsValidated);            
+            var packageBytes = await packageCreator.Create(optionsValidated);     
             return File(packageBytes, "application/zip", $"{options.Name}-ios-app-package.zip");
         }
 
