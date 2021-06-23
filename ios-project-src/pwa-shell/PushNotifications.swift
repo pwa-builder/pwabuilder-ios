@@ -1,11 +1,3 @@
-//
-//  PushNotifications.swift
-//  pwa-shell
-//
-//  Created by Gleb Khmyznikov on 11/23/19.
-//  
-//
-
 import WebKit
 import FirebaseMessaging
 

@@ -1,11 +1,3 @@
-//
-//  Printer.swift
-//  pwa-shell
-//
-//  Created by Gleb Khmyznikov on 11/22/19.
-//  
-//
-
 import UIKit
 import WebKit
 

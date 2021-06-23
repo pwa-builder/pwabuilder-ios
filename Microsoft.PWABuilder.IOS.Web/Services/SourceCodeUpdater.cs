@@ -79,11 +79,11 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             await ReplaceText(settingsFilePath, allowedOriginExisting, allowedOriginDesired);
 
             // Update authOrigins in Settings.swift
-            var authOriginsExisting = "let authOrigins = [\"login.microsoftonline.com\"]";
+            var authOriginsExisting = "let authOrigins: [String] = [\"login.microsoftonline.com\"]";
             var authOriginsPermittedUrls = options.PermittedUrls
                 .Select(url => url.ToString().Replace(url.Scheme + "://", string.Empty))
                 .Select(url => $"\"{url}\"");
-            var authOriginsDesired = $"let authOrigins = [{string.Join(',', authOriginsPermittedUrls)}]";
+            var authOriginsDesired = $"let authOrigins: [String] = [{string.Join(',', authOriginsPermittedUrls)}]";
             await ReplaceText(settingsFilePath, authOriginsExisting, authOriginsDesired);
 
             // Update app URL in Entitlements.plist

@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  pwa-shell
-//
-//  Created by Gleb Khmyznikov on 11/15/19.
-//  
-//
-
 import UIKit
 import WebKit
 

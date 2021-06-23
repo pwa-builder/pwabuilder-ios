@@ -1,11 +1,3 @@
-//
-//  Settings.swift
-//  pwa-shell
-//
-//  Created by Gleb Khmyznikov on 11/23/19.
-//  
-//
-
 import WebKit
 
 struct Cookie {
@@ -24,7 +16,7 @@ let allowedOrigin = "messianicchords.com"
 
 // auth origins will open in modal and show toolbar for back into the main origin.
 // These should also appear in Info.plist
-let authOrigins = ["login.microsoftonline.com"]
+let authOrigins: [String] = ["login.microsoftonline.com"]
 
 let platformCookie = Cookie(name: "app-platform", value: "iOS App Store")
 
