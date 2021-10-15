@@ -19,12 +19,12 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="LaunchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="I2s-HW-Q4d">
                                 <rect key="frame" x="175" y="416" width="64" height="64"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" systemColor="secondarySystemFillColor"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XpK-Bq-A7U"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="I2s-HW-Q4d" firstAttribute="centerY" secondItem="4mO-e4-REQ" secondAttribute="centerY" id="4kv-Qc-mPU"/>
                             <constraint firstItem="I2s-HW-Q4d" firstAttribute="centerX" secondItem="4mO-e4-REQ" secondAttribute="centerX" id="6Z0-rS-c8Q"/>
