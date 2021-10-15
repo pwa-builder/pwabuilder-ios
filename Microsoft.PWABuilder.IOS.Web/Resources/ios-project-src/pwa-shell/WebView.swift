@@ -23,7 +23,8 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     
     let webView = WKWebView(frame: calcWebviewFrame(webviewView: container, toolbarView: nil), configuration: config)
     
-    setCustomCookie(webView: webView)
+    //setCustomCookie(webView: webView)
+    setAppStoreAsReferrer(contentController: userContentController);
 
     webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
@@ -43,19 +44,25 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     return webView
 }
 
-func setCustomCookie(webView: WKWebView) {
-    let _platformCookie = HTTPCookie(properties: [
-        .domain: rootUrl.host!,
-        .path: "/",
-        .name: platformCookie.name,
-        .value: platformCookie.value,
-        .secure: "FALSE",
-        .expires: NSDate(timeIntervalSinceNow: 31556926)
-    ])!
-
-    webView.configuration.websiteDataStore.httpCookieStore.setCookie(_platformCookie)
-
+func setAppStoreAsReferrer(contentController: WKUserContentController) {
+    let scriptSource = "document.referrer = `app-info://platform/ios-store`;"
+    let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+    contentController.addUserScript(script);
 }
+
+// func setCustomCookie(webView: WKWebView) {
+//     let _platformCookie = HTTPCookie(properties: [
+//         .domain: rootUrl.host!,
+//         .path: "/",
+//         .name: platformCookie.name,
+//         .value: platformCookie.value,
+//         .secure: "FALSE",
+//         .expires: NSDate(timeIntervalSinceNow: 31556926)
+//     ])!
+
+//     webView.configuration.websiteDataStore.httpCookieStore.setCookie(_platformCookie)
+
+// }
 
 func calcWebviewFrame(webviewView: UIView, toolbarView: UIToolbar?) -> CGRect{
     if ((toolbarView) != nil) {
