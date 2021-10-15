@@ -44,10 +44,10 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             {
                 var outputDir = temp.CreateDirectory($"ios-package-{Guid.NewGuid()}");
 
-                // Unzip the project template.
-                ZipFile.ExtractToDirectory(appSettings.SourceCodeZipPath, outputDir);
+                // Make a copy of the iOS source code.
+                new DirectoryInfo(appSettings.IOSSourceCodePath).CopyContents(new DirectoryInfo(outputDir));
 
-                // Update the source files.
+                // Update the source files with the real values from the requested PWA
                 await this.sourceUpdater.Update(options, outputDir);
 
                 // Create any missing images for the iOS template.

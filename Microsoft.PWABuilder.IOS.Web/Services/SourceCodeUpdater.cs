@@ -38,7 +38,6 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             await ReplaceText(launchScreenPath, existingSplashColorLine, desiredSplashColorLine);
             await ReplaceText(mainStoryboardPath, existingSplashColorLine, desiredSplashColorLine);
 
-
             // Set the status bar color
             var existingStatusBarColorLine = "<color key=\"backgroundColor\" red=\"0.0\" green=\"1\" blue=\"0.0\" alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
             var desiredStatusBarColorLine = $"<color key=\"backgroundColor\" {options.StatusBarColor.ToStoryboardColorString()} alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";

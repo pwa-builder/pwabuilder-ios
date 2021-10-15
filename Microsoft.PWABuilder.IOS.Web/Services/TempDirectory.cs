@@ -12,7 +12,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
     /// <summary>
     /// Creates and tracks temporary files and directories and deletes them when CleanUp() is called.
     /// </summary>
-    public class TempDirectory
+    public class TempDirectory : IDisposable
     {
         private readonly List<string> directoriesToCleanUp = new();
         private readonly List<string> filesToCleanUp = new();
@@ -69,6 +69,12 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
                     }
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            this.CleanUp();
+            GC.SuppressFinalize(this);
         }
     }
 }

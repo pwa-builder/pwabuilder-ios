@@ -61,7 +61,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
         private async Task<ImageGeneratorServiceZipFile> InvokePwabuilderImageGeneratorService(IOSAppPackageOptions.Validated options, WebAppManifestContext webManifest)
         {
             var baseImageBytes = await GetBaseImage(options, webManifest);
-            var imagesZipUrl = await CreateIOSImagesZip(baseImageBytes, 0.3, "transparent");
+            var imagesZipUrl = await CreateIOSImagesZip(baseImageBytes, 0, "transparent");
             return await DownloadIOSImagesZip(imagesZipUrl);
         }
 
@@ -109,11 +109,10 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
 
         private async Task<Uri> CreateIOSImagesZip(byte[] image, double padding, string backgroundColor)
         {
-            // The image generation API takes the following parameters:
+            // The image generation API takes the following parameters, documented here: https://github.com/pwa-builder/pwabuilder-Image-Generator
             // - fileName: bytes
-            // - padding: double
-            // - colorOption: "choose" | "transparent"
-            // - color: if colorOption = "choose", then this is the hex color. If colorOption = "transparent", color should be omitted.
+            // - padding: double (0 = no padding, 1 = max padding)
+            // - color: hex color, named color, or "transparent"
             // - platform: ios
             // - colorChanged: if colorOption = "choose", this should be 1. Otherwise, omit.
             var fileContent = new StreamContent(new MemoryStream(image));
@@ -123,14 +122,9 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             {
                 { fileContent, "fileName" },
                 { new StringContent(padding.ToString()), "padding" },
-                { new StringContent(backgroundColor == "transparent" ? backgroundColor : "choose"), "colorOption" },
+                { new StringContent(backgroundColor), "color" },
                 { new StringContent("ios"), "platform" }
             };
-            if (backgroundColor != "transparent")
-            {
-                imageGeneratorArgs.Add(new StringContent(backgroundColor), "color");
-                imageGeneratorArgs.Add(new StringContent("1"), "colorChanged");
-            }
 
             var imagesResponse = await this.http.PostAsync(imageGeneratorServiceUrl, imageGeneratorArgs);
             imagesResponse.EnsureSuccessStatusCode();

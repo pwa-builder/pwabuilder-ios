@@ -6,26 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Resources\ios-project-src\**" />
-    <Content Remove="Resources\ios-project-src\**" />
-    <EmbeddedResource Remove="Resources\ios-project-src\**" />
-    <None Remove="Resources\ios-project-src\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="next-steps.html">
+    <None Update="Resources\next-steps.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="next-steps.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\ios-project-src.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

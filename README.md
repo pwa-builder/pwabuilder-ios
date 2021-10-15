@@ -2,6 +2,16 @@
 
 This is PWABuilder's iOS platform that generates an iOS app that loads your PWA in a WKWebView.
 
+# Architecture
+
+This is a C# web app that listens for requests to generate a PWA.
+
+When a request comes in, it creates a copy of the iOS PWA template code, modifies the template with the desired PWA values and zips up the result.
+
+The iOS PWA template code is located in [/Microsoft.PWABuilder.IOS.Web/Resources](https://github.com/pwa-builder/pwabuilder-ios/tree/main/Microsoft.PWABuilder.IOS.Web/Resources).
+
+The code is a fork of https://github.com/khmyznikov/pwa-install/, licensed under [The Unlicense](https://unlicense.org/). A big thanks to Gleb for permitting PWABuilder to to use, fork, and improve on his PWA template.
+
 # Running locally
 
 Open the solution in Visual Studio and hit F5 to run. https://localhost:44314 will open with a page allowing you to test the service.
@@ -22,10 +32,7 @@ You may also generate a package manually by POSTing to `/packages/create` with t
         "short_name": "Chonks",
         "name": "Sad Chonks",
         "description": "Your daily source for Sad Chonks",
-        "categories": [
-            "cats",
-            "memes"
-        ],
+        "categories": [ "entertainment" ],
         "screenshots": [
             {
                 "src": "/chonkscreenshot1.jpeg",
