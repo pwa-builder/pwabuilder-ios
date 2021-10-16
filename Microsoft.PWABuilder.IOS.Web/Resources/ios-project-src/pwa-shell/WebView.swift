@@ -23,8 +23,7 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     
     let webView = WKWebView(frame: calcWebviewFrame(webviewView: container, toolbarView: nil), configuration: config)
     
-    //setCustomCookie(webView: webView)
-    setAppStoreAsReferrer(contentController: userContentController);
+    setCustomCookie(webView: webView)
 
     webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
@@ -50,19 +49,19 @@ func setAppStoreAsReferrer(contentController: WKUserContentController) {
     contentController.addUserScript(script);
 }
 
-// func setCustomCookie(webView: WKWebView) {
-//     let _platformCookie = HTTPCookie(properties: [
-//         .domain: rootUrl.host!,
-//         .path: "/",
-//         .name: platformCookie.name,
-//         .value: platformCookie.value,
-//         .secure: "FALSE",
-//         .expires: NSDate(timeIntervalSinceNow: 31556926)
-//     ])!
+func setCustomCookie(webView: WKWebView) {
+    let _platformCookie = HTTPCookie(properties: [
+        .domain: rootUrl.host!,
+        .path: "/",
+        .name: platformCookie.name,
+        .value: platformCookie.value,
+        .secure: "FALSE",
+        .expires: NSDate(timeIntervalSinceNow: 31556926)
+    ])!
 
-//     webView.configuration.websiteDataStore.httpCookieStore.setCookie(_platformCookie)
+    webView.configuration.websiteDataStore.httpCookieStore.setCookie(_platformCookie)
 
-// }
+}
 
 func calcWebviewFrame(webviewView: UIView, toolbarView: UIToolbar?) -> CGRect{
     if ((toolbarView) != nil) {
@@ -143,7 +142,7 @@ extension ViewController: WKUIDelegate {
                     }
                     
                 } else {
-                    var matchingAuthOrigin = authOrigins.first(where: { requestHost.range(of: $0) != nil })
+                    let matchingAuthOrigin = authOrigins.first(where: { requestHost.range(of: $0) != nil })
                     //if (requestHost.range(of: authOrigin_1) != nil || requestHost.range(of: authOrigin_2) != nil || requestHost.range(of: authOrigin_3) != nil || requestHost.range(of: authOrigin_4) != nil) {
                     if (matchingAuthOrigin != nil) {
                         decisionHandler(.allow)
@@ -156,8 +155,7 @@ extension ViewController: WKUIDelegate {
                     else {
                         if (navigationAction.navigationType == .other &&
                             navigationAction.value(forKey: "syntheticClickType") as! Int == 0 &&
-                            (navigationAction.targetFrame != nil) &&
-                            (navigationAction.sourceFrame != nil)
+                            (navigationAction.targetFrame != nil)
                         ) {
                             decisionHandler(.allow)
                             return

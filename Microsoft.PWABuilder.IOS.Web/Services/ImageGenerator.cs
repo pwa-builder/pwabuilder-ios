@@ -61,7 +61,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
         private async Task<ImageGeneratorServiceZipFile> InvokePwabuilderImageGeneratorService(IOSAppPackageOptions.Validated options, WebAppManifestContext webManifest)
         {
             var baseImageBytes = await GetBaseImage(options, webManifest);
-            var imagesZipUrl = await CreateIOSImagesZip(baseImageBytes, 0, "transparent");
+            var imagesZipUrl = await CreateIOSImagesZip(baseImageBytes, 0.3, "transparent");
             return await DownloadIOSImagesZip(imagesZipUrl);
         }
 
