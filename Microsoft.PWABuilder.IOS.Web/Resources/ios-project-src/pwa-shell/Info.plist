@@ -26,9 +26,7 @@
 			<key>CFBundleURLName</key>
 			<string></string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>pwashell</string>
-			</array>
+			<array />
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -92,7 +90,7 @@
 	<true/>
 	<key>WKAppBoundDomains</key>
 	<array>
-		<string>messianicchords.com/?pwashellz</string>
+		<string>webboard.app/?pwashellz</string>
 	</array>
 </dict>
 </plist>

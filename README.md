@@ -21,6 +21,7 @@ You may also generate a package manually by POSTing to `/packages/create` with t
 ```json
 {
     "name": "Sad Chonks",
+    "bundleId": "com.sadchonks",
     "url": "https://sadchonks.com",
     "imageUrl": "https://sadchonks.com/kitteh-512.png",
     "splashColor": "#f5f5f5",

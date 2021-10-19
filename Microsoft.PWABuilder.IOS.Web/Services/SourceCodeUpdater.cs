@@ -25,6 +25,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
         {
             await UpdateAppColors(sourceDir, options);
             await UpdateAppNameAndUrls(sourceDir, options);
+            await UpdateAppBundleId(sourceDir, options);
         }
 
         private async Task UpdateAppColors(string sourceDir, IOSAppPackageOptions.Validated options)
@@ -61,19 +62,19 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             await ReplaceText(infoPlistFilePath, appNameExisting, appNameDesired);
 
             // Add URL and permitted URLs to app bound domains (used for service worker) in Info.plist
-            var urlExisting = "<string>messianicchords.com/?pwashellz</string>";
+            var urlExisting = "<string>webboard.app/?pwashellz</string>";
             var urlDesiredBuilder = new System.Text.StringBuilder();
             urlDesiredBuilder.Append($"<string>{options.Url.ToString().Replace("https://", string.Empty).TrimEnd('/')}</string>"); // Append the URL of the PWA
             options.PermittedUrls.ForEach(permittedUrl => urlDesiredBuilder.Append($"\r<string>{permittedUrl.ToString().Replace("https://", string.Empty).Replace("http://", string.Empty)}</string>"));
             await ReplaceText(infoPlistFilePath, urlExisting, urlDesiredBuilder.ToString());
 
             // Update app URL in Settings.swift
-            var settingsUrlExisting = "let rootUrl = URL(string: \"https://messianicchords.com/?pwashellz\")!";
+            var settingsUrlExisting = "let rootUrl = URL(string: \"https://webboard.app/?pwashellz\")!";
             var settingsUrlDesired = $"let rootUrl = URL(string: \"{options.Url.ToString().TrimEnd('/')}\")!";
             await ReplaceText(settingsFilePath, settingsUrlExisting, settingsUrlDesired);
 
             // Update allowed origin in Settings.swift
-            var allowedOriginExisting = "let allowedOrigin = \"messianicchords.com\"";
+            var allowedOriginExisting = "let allowedOrigin = \"webboard.app\"";
             var allowedOriginDesired = $"let allowedOrigin = \"{options.Url.ToString().Replace("https://", string.Empty).TrimEnd('/')}\"";
             await ReplaceText(settingsFilePath, allowedOriginExisting, allowedOriginDesired);
 
@@ -89,6 +90,14 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             var entitlementsAppUrlExisting = "<string>applinks:pwashellz.com</string>";
             var entitlementsAppUrlDesired = $"<string>applinks:{options.Url.ToString().Replace("https://", string.Empty)}</string>";
             await ReplaceText(entitlementsFilePath, entitlementsAppUrlExisting, entitlementsAppUrlDesired);
+        }
+
+        private Task UpdateAppBundleId(string sourceDir, IOSAppPackageOptions.Validated options)
+        {
+            var projFile = GetExistingFile(sourceDir, "project.pbxproj");
+            var existingBundleText = "PRODUCT_BUNDLE_IDENTIFIER = com.pwa.shell;";
+            var desiredBundleText = $"PRODUCT_BUNDLE_IDENTIFIER = {options.BundleId};";
+            return ReplaceText(projFile, existingBundleText, desiredBundleText);
         }
 
         private void UpdatePushSubscription(string sourceDir)

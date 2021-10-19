@@ -18,6 +18,7 @@ function getDefaultJson() {
     // This creates an unsigned package. Should be considered the bare minimum.
     return {
         name: "Sad Chonks",
+        bundleId: "com.sadchonks",
         url: "https://sadchonks.com",
         imageUrl: "https://sadchonks.com/kitteh-512.png",
         splashColor: "#f5f5f5",
