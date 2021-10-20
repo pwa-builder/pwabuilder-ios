@@ -1,6 +1,6 @@
 ﻿# Submitting your PWA to the iOS App Store
 
-Once you've packaged your PWA with PWABuilder and compiled the [source code with Xcode](next-steps.md), you can submit your app to the iOS App Store.
+Once you've packaged your PWA with PWABuilder and [followed the steps to build your package](/next-steps.md), you can submit your app to the iOS App Store.
 
 The process looks like this:
 
@@ -15,16 +15,19 @@ Each step is described below.
 
 To submit to the App Store, [sign-in to your Apple Developer Account](https://developer.apple.com/account/).
 
-If you don't have an Apple Developer account, [enroll](https://developer.apple.com/programs/enroll). Enrollment cost is $99 USD/year, though [non-profits can have this fee waived](https://developer.apple.com/support/membership-fee-waiver/).)
+If you don't have an Apple Developer account, [enroll here](https://developer.apple.com/programs/enroll). Enrollment costs $99 USD/year, though [non-profits can have this fee waived](https://developer.apple.com/support/membership-fee-waiver/).
 
 ## 2. Create your Bundle ID
 
 Once you're signed in, you'll need to create a Bundle ID for your app. 
 
-> 💁‍♀️ What's a Bundle ID? 
-> A Bundle ID is a string (e.g. com.myawesomepwa) that uniquely identifies your app in the App Store.
+> 💁‍♀️ What's a Bundle ID?
+> 
+> A Bundle ID is a string (e.g. com.myawesomepwa) that uniquely identifies your app in the App Store.> 
 > Apple recommends using a reverse-domain style string, such as com.domainname.appname.
-> This string must be the same string you used in PWABuilder when packaging your iOS app. By default, PWABuilder uses the reverse-domain of your PWA as your Bundle ID. 
+>
+> This string must be the same string you used in PWABuilder when packaging your iOS app. By default, PWABuilder uses the reverse-domain of your PWA as your Bundle ID.
+>
 > If you're unsure what value you should use as your Bundle ID, go back to PWABuilder, package for iOS, and take note of the Bundle ID in the iOS options dialog. This value is also available inside your `project.pbxproj` file, next to the `PRODUCT_BUNDLE_IDENTIFIER` string.
 
 Choose `Certificates, Identifiers & Profiles` to create your Bundle ID.
@@ -41,7 +44,11 @@ Add any `Description` you like, then paste in your Bundle ID into the `Identifie
 
 (TODO: bundle ID and description image here)
 
-💁‍♂️ Remember, **`Bundle ID` must be set to the same value you used when generating your package in PWABuilder.** If you're unsure what your Bundle ID is, go back to PWABuilder, package for iOS, and take note of your `Bundle ID`. Alternately, you can find your Bundle ID inside your `project.pbxproj` file, next to the `PRODUCT_BUNDLE_IDENTIFIER` string.
+> 💁‍♂️ Remember, **`Bundle ID` must be set to the same value you used when generating your package in PWABuilder.**
+> 
+> If you're unsure what your Bundle ID is, go back to PWABuilder, package for iOS, and take note of your `Bundle ID`.
+> 
+> Alternately, you can find your Bundle ID inside your `project.pbxproj` file, next to the `PRODUCT_BUNDLE_IDENTIFIER` string.
 
 You may leave all `Capabilities` and `App Services` unchecked.
 

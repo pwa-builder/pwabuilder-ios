@@ -56,4 +56,4 @@ Since that time, a few members of the PWABuilder open source community successfu
 
 Check out our [PWABuilder iOS FAQs](/faq.md).
 
-If you're stuck, we're here to help. You can [open an issue](https://github.com/pwa-builder/PWABuilder/issues/new?assignees=&labels=ios-platform&body=Type%20your%20question%20here.%20Please%20include%20the%20URL%20to%20your%20PWA.%0A%0A%3E%20If%20my%20answer%20was%20in%20the%20docs%20all%20along%2C%20I%20promise%20to%20give%20%245%20USD%20to%20charity.) and we'll help walk you through it.
+If you're stuck, we're here to help. You can [open an issue](https://github.com/pwa-builder/PWABuilder/issues/new?assignees=&labels=ios-platform,question%20%3Agrey_question%3A&body=Type%20your%20question%20here.%20Please%20include%20the%20URL%20to%20your%20PWA.%0A%0A%3E%20If%20my%20answer%20was%20in%20the%20docs%20all%20along%2C%20I%20promise%20to%20give%20%245%20USD%20to%20charity.) and we'll help walk you through it.
