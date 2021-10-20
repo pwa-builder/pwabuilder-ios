@@ -1,4 +1,4 @@
-﻿## PWABuilder iOS platform Frequently Asked Questions (FAQs)
+﻿# PWABuilder iOS platform Frequently Asked Questions (FAQs)
 
 ## How can I tell if my PWA was launched from the iOS app?
 

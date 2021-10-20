@@ -46,9 +46,9 @@ Caveat emptor: Apple may or may not accept your PWA in their app store.
 
 In 2019, Apple released new [guidelines for HTML5 apps in the App Store](https://developer.apple.com/news/?id=09062019b). The new guidelines appear to state that PWAs may not be accepted into the App Store.
 
-The PWABuilder team has attempted to clarify with Apple their stance on PWA support. Despite several meetings, we were unable to get an official answer on whether Apple would outright reject an app simply because it's a PWA.'
+The PWABuilder team attempted to clarify with Apple their stance on PWA support. Despite several meetings, we were unable to get an official answer.
 
-Since that time, a few members of the PWABuilder open source community successfully published PWAs in the iOS app store. Thus, we are releasing our new iOS platform with the knowledge that Apple may not approve some PWAs. Additionally, in 2021's Apple v. Epis lawsuit, Apple lawyers [cited PWAs on iOS](https://www.accc.gov.au/system/files/Apple%20Pty%20Limited%20%2810%20February%202021%29.pdf) as evidence against App Store monopoly. This suggests Apple intends to continue allowing PWAs on iOS.
+Since that time, a few members of the PWABuilder open source community successfully published PWAs in the iOS app store. Thus, we are releasing our new iOS platform with the knowledge that Apple may not approve some PWAs, especially if they are little more than websites.
 
 **Our recommendation is to build a great PWA.** PWAs that provide real value to users, PWAs that are more than just websites, PWAs that look and feel like real apps. These are more likely to pass certification and get into the app store. Provide value to your users, and app stores will _want_ your PWA. 
 
