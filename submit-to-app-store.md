@@ -32,17 +32,17 @@ Once you're signed in, you'll need to create a Bundle ID for your app.
 
 Choose `Certificates, Identifiers & Profiles` to create your Bundle ID.
 
-(TODO certs & identifiers image here)
+![image](https://user-images.githubusercontent.com/312936/138008456-bc72e5c5-1314-4844-8065-8a9c2f1a231b.png)
 
 Then choose `Identifiers` and click `+` to add a new identifier.
 
-(TODO new identifier image here)
+![image](https://user-images.githubusercontent.com/312936/138008541-9ae86cac-05e2-4b50-a0e9-1f6297638bd3.png)
 
 Choose `App IDs`, then choose `App` as the type. You'll be prompted for a `Description` and `Bundle ID`.
 
 Add any `Description` you like, then paste in your Bundle ID into the `Identifier` text box:
 
-(TODO: bundle ID and description image here)
+![image](https://user-images.githubusercontent.com/312936/138008584-7aaf1b12-2423-4a1d-9de2-d473d4fe6330.png)
 
 > 💁‍♂️ Remember, **`Bundle ID` must be set to the same value you used when generating your package in PWABuilder.**
 > 
@@ -58,19 +58,21 @@ Click `Continue` and then `Register` to finish creating your Bundle ID.
 
 Go back to [developer.apple.com/account](https://developer.apple.com/account/) and choose `App Store Connect`:
 
-(TODO app store connect image here)
+![image](https://user-images.githubusercontent.com/312936/138008617-5205be9e-a750-40fa-a35c-13a43fda8d48.png)
 
 Once you're in [App Store Connect](https://appstoreconnect.apple.com), choose `My Apps`
 
-(TODO my apps image here)
+![image](https://user-images.githubusercontent.com/312936/138008636-9871da39-34f5-433a-817c-cafd76daf4bd.png)
 
-Your apps will be listed. If you want to update an existing app, choose that app. Otherwise, click `+` -> `New App`:
+Your existing apps will be listed. If you want to update an existing app, choose that app. Otherwise, click `+` -> `New App`:
 
-(TODO new app image here)
+![image](https://user-images.githubusercontent.com/312936/138008660-842d5edb-a4bd-4875-b997-0df931a4f3dd.png)
 
 You'll be asked for details about your new app. For platform, choose `iOS`. For `Bundle ID`, choose the Bundle ID you created in the previous step. For `SKU`, you can use any string you like. For `User Access`, specify `Full Access`:
 
-(TODO new app details image here)
+![image](https://user-images.githubusercontent.com/312936/138008701-ee5e070d-6569-42d3-9b0b-c5ad9fcbc04d.png)
+
+Click `Create` to complete your app reservation.
 
 ## 4. Upload your app package
 
