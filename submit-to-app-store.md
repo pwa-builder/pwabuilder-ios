@@ -63,15 +63,15 @@ Click `Continue` and then `Register` to finish creating your Bundle ID.
 
 On your Mac, launch `Keychain Access` app. From the top menu bar, choose `Keychain Access` -> `Certificate Assistant` -> `Request a Certificate from a Certificate Authority`
 
-(TODO: request CSR menu item)
+![image](https://user-images.githubusercontent.com/312936/138376813-73100ac3-832a-4fda-8f9d-583b0517a398.png)
 
 Add your email address and your name. You may leave `CA Email Address` empty. Choose `Saved to disk`, then click `Continue`:
 
-(TODO: CSR info)
+![image](https://user-images.githubusercontent.com/312936/138376830-23a307d3-19be-44db-bf66-18d5186afc96.png)
 
 With your CSR file saved, go to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Certificates`.
 
-(TODO: create new cert)
+![image](https://user-images.githubusercontent.com/312936/138376850-de8b9d84-2ee1-4906-a3f7-7dc2ebbd8d06.png)
 
 CONTINUE HERE
 
@@ -79,15 +79,15 @@ CONTINUE HERE
 
 Go back to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Profiles`. Then click `+` to create a new Provisioning Provile:
 
-(TODO: add Provisioning profile image)
+![image](https://user-images.githubusercontent.com/312936/138376889-6f87cd34-f416-4b19-8efb-8514375e2978.png)
 
 On the New Provisioning Profile page, choose `App Store`, and click `Continue`:
 
-(TODO: show New Povisioning profile image)
+![image](https://user-images.githubusercontent.com/312936/138376946-84c4cae2-d85e-4e29-8b48-e5eec81e4815.png)
 
-On the next screen, choose your desired app ID, the Bundle ID you created earlier, then click `Continue`:
+On the next screen, choose your desired app ID -- the Bundle ID you created in step 1 -- then click `Continue`:
 
-(TODO: show app ID selection)
+![image](https://user-images.githubusercontent.com/312936/138376988-9536f349-8b7a-48b2-8d1e-7b03ae9ba267.png)
 
 On the next page, you'll be asked to choose an existing certificate or create a new one. To create a new one, choose `Create Certificate`.
 
@@ -96,8 +96,7 @@ On the `Create a New Certificate` page, choose `iOS Distribution (App Store and 
 (TODO: new cert page)
 
 
-
-## 4. Create your app reservation
+## 5. Create your app reservation
 
 Go back to [developer.apple.com/account](https://developer.apple.com/account/) and choose `App Store Connect`:
 
@@ -117,7 +116,7 @@ You'll be asked for details about your new app. For platform, choose `iOS`. For 
 
 Click `Create` to complete your app reservation.
 
-## 4. Upload your app package
+## 6. Upload your app package
 
 After creating your app reservation in the last step, you'll be redirected to your app details page where you'll upload your app package, add screenshots, description of your app, and more.
 
