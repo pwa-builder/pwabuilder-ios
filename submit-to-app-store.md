@@ -30,9 +30,9 @@ Once you're signed in, you'll need to create a Bundle ID for your app.
 >
 > This string must be the same string you used in PWABuilder when packaging your iOS app. By default, PWABuilder uses the reverse-domain of your PWA as your Bundle ID.
 >
-> If you're unsure what value you should use as your Bundle ID, go back to PWABuilder, package for iOS, and take note of the Bundle ID in the iOS options dialog. This value is also available inside your `project.pbxproj` file, next to the `PRODUCT_BUNDLE_IDENTIFIER` string.
+> If you're unsure what value you should use as your Bundle ID, go back to PWABuilder, package for iOS, and take note of the Bundle ID in PWABuilder's iOS options dialog.
 
-Choose `Certificates, Identifiers & Profiles` to create your Bundle ID.
+Go to your [Apple Developer account page](https://developer.apple.com/account/) and choose `Certificates, Identifiers & Profiles` to create your Bundle ID.
 
 ![image](https://user-images.githubusercontent.com/312936/138008456-bc72e5c5-1314-4844-8065-8a9c2f1a231b.png)
 
