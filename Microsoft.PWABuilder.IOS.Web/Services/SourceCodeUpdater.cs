@@ -86,9 +86,11 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             var authOriginsDesired = $"let authOrigins: [String] = [{string.Join(',', authOriginsPermittedUrls)}]";
             await ReplaceText(settingsFilePath, authOriginsExisting, authOriginsDesired);
 
-            // Update app URL in Entitlements.plist
+            // Update app URL in Entitlements.plist. This lets the PWA app handle links to the domain.
+            // Note: value here must be the host only. Apple says, "Make sure to only include the desired subdomain and the top-level domain. Don’t include path and query components or a trailing slash (/)."
+            // See https://developer.apple.com/documentation/xcode/supporting-associated-domains
             var entitlementsAppUrlExisting = "<string>applinks:pwashellz.com</string>";
-            var entitlementsAppUrlDesired = $"<string>applinks:{options.Url.ToString().Replace("https://", string.Empty)}</string>";
+            var entitlementsAppUrlDesired = $"<string>applinks:{options.Url.Host}</string>"; // Trim ending slash. See 
             await ReplaceText(entitlementsFilePath, entitlementsAppUrlExisting, entitlementsAppUrlDesired);
         }
 

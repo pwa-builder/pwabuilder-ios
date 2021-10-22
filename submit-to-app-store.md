@@ -5,9 +5,11 @@ Once you've packaged your PWA with PWABuilder and [followed the steps to build y
 The process looks like this:
 
 1. Sign into your Apple Developer account
-2. Create your Bundle ID
-3. Create your app reservation
-4. Upload your app package
+2. Create a Bundle ID
+3. Create a Certificate Signing Request (CSR)
+4. Create a Provisioning Profile
+5. Create an app reservation
+6. Upload your app package
 
 Each step is described below.
 
@@ -23,7 +25,7 @@ Once you're signed in, you'll need to create a Bundle ID for your app.
 
 > 💁‍♀️ What's a Bundle ID?
 > 
-> A Bundle ID is a string (e.g. com.myawesomepwa) that uniquely identifies your app in the App Store.> 
+> A Bundle ID is a string (e.g. com.myawesomepwa) that uniquely identifies your app in the App Store.
 > Apple recommends using a reverse-domain style string, such as com.domainname.appname.
 >
 > This string must be the same string you used in PWABuilder when packaging your iOS app. By default, PWABuilder uses the reverse-domain of your PWA as your Bundle ID.
@@ -50,11 +52,52 @@ Add any `Description` you like, then paste in your Bundle ID into the `Identifie
 > 
 > Alternately, you can find your Bundle ID inside your `project.pbxproj` file, next to the `PRODUCT_BUNDLE_IDENTIFIER` string.
 
-You may leave all `Capabilities` and `App Services` unchecked.
+Under `Capabilities`, enable the following capabilities:
+
+1. Associated Domains
+2. Push Notifications
 
 Click `Continue` and then `Register` to finish creating your Bundle ID.
 
-## 3. Create your app reservation
+## 3. Create a Certificate Signing Request (CSR)
+
+On your Mac, launch `Keychain Access` app. From the top menu bar, choose `Keychain Access` -> `Certificate Assistant` -> `Request a Certificate from a Certificate Authority`
+
+(TODO: request CSR menu item)
+
+Add your email address and your name. You may leave `CA Email Address` empty. Choose `Saved to disk`, then click `Continue`:
+
+(TODO: CSR info)
+
+With your CSR file saved, go to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Certificates`.
+
+(TODO: create new cert)
+
+CONTINUE HERE
+
+## 4. Create a Provisioning Profile
+
+Go back to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Profiles`. Then click `+` to create a new Provisioning Provile:
+
+(TODO: add Provisioning profile image)
+
+On the New Provisioning Profile page, choose `App Store`, and click `Continue`:
+
+(TODO: show New Povisioning profile image)
+
+On the next screen, choose your desired app ID, the Bundle ID you created earlier, then click `Continue`:
+
+(TODO: show app ID selection)
+
+On the next page, you'll be asked to choose an existing certificate or create a new one. To create a new one, choose `Create Certificate`.
+
+On the `Create a New Certificate` page, choose `iOS Distribution (App Store and Ad Hoc)`:
+
+(TODO: new cert page)
+
+
+
+## 4. Create your app reservation
 
 Go back to [developer.apple.com/account](https://developer.apple.com/account/) and choose `App Store Connect`:
 
@@ -78,4 +121,41 @@ Click `Create` to complete your app reservation.
 
 After creating your app reservation in the last step, you'll be redirected to your app details page where you'll upload your app package, add screenshots, description of your app, and more.
 
-TODO: continue here
+(TODO: image of app details page)
+
+On this page, fill our the information about your app, such as `Version`, `Description`, `Keywords`, Support URL, screenshots, and other metadata.
+
+When you're ready to upload your PWA app package, you'll submit your package by signing into Xcode, assigning your project to your Apple Developer account, then creating an archive.
+
+Each step is described below.
+
+### Sign into Xcode
+
+Go to `Xcode` menu -> `Preferences`:
+
+(TODO: image of Xcode preferences menu)
+
+In the Preferences dialog, choose `Accounts`. If your Apple Developer account isn't listed, click the `+` button to add it to Xcode.
+
+Once you've signed into your Apple Developer account in Xcode, dismiss the Preferences dialog.
+
+### Assign your project to your account
+
+In Xcode, choose choose `Project Navigator (📁)` -> `pwa-shell` -> `Signing & Capabilities` -> Team. Choose a team
+
+> 💁🏽‍♀️ Heads up
+>
+> If you receive an error saying, "Failed to create provisioning profile. There are no devices registered in your account...", then you'll need to register an iOS device to your account. To do that, go to https://developer.apple.com/account/resources/devices/list and register a device.
+
+Create an archive in Xcode
+
+Open `pwa-shell.xcworkspace` file in Xcode. With your PWA project opened in Xcode, choose `pwa-shell` -> `pwa-shell` -> `Any iOS Device (arm64)`:
+
+(TODO: image of Any iOS Device)
+
+Then from the Xcode menu bar, choose `Product` -> `Archive`:
+
+(TODO: image of Product->Archive)
+
+
+
