@@ -52,10 +52,10 @@ Add any `Description` you like, then paste in your Bundle ID into the `Identifie
 > 
 > Alternately, you can find your Bundle ID inside your `project.pbxproj` file, next to the `PRODUCT_BUNDLE_IDENTIFIER` string.
 
-Under `Capabilities`, enable the following capabilities:
+Under `Capabilities`, **enable** the following capabilities:
 
-1. Associated Domains
-2. Push Notifications
+- Associated Domains
+- Push Notifications
 
 Click `Continue` and then `Register` to finish creating your Bundle ID.
 
