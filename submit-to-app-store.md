@@ -6,10 +6,11 @@ The process looks like this:
 
 1. Sign into your Apple Developer account
 2. Create a Bundle ID
-3. Create a Certificate Signing Request (CSR)
-4. Create a Provisioning Profile
-5. Create an app reservation
-6. Upload your app package
+3. Create a certificate signing request (CSR)
+4. Create a new certificate
+5. Create a provisioning profile
+6. Create an app reservation
+7. Upload your app package
 
 Each step is described below.
 
@@ -69,13 +70,17 @@ Add your email address and your name. You may leave `CA Email Address` empty. Ch
 
 ![image](https://user-images.githubusercontent.com/312936/138376830-23a307d3-19be-44db-bf66-18d5186afc96.png)
 
-With your `.certSigningRequest` file saved to disk, go to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Certificates`. Click `+` to add a new certificate:
+You'll be prompted to save the `.certSigningRequest` file to disk.
+
+## 4. Create a certificate
+
+Go to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Certificates`. Click `+` to add a new certificate:
 
 ![image](https://user-images.githubusercontent.com/312936/138376850-de8b9d84-2ee1-4906-a3f7-7dc2ebbd8d06.png)
 
-Choose `Apple Distribution` and click `Continue`:
+Choose `iOS Distribution (App Store and Ad Hoc)` and click `Continue`:
 
-![image](https://user-images.githubusercontent.com/312936/138388955-3776e400-60c5-4509-b2c4-38817f2abf84.png)
+![image](https://user-images.githubusercontent.com/312936/138390093-3d43f913-3bb5-4599-9428-d3f835806b92.png)
 
 You'll be prompted to upload a Certificate Signing Request (`.certSigningRequest`) file. Choose the file you saved to disk in the previous step, then click `Continue`:
 
@@ -83,7 +88,7 @@ You'll be prompted to upload a Certificate Signing Request (`.certSigningRequest
 
 On the final certificate screen, choose `Download` to save your `.cer` certificate file to disk.
 
-## 4. Create a Provisioning Profile
+## 5. Create a Provisioning Profile
 
 Go back to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Profiles`. Then click `+` to create a new Provisioning Provile:
 
@@ -107,7 +112,7 @@ On the final page, provide a `Provisioning Profile Name`, such as My PWA Publish
 
 On the final page, choose `Download` to download you `.mobileprovision` Provisioning Profile file.
 
-## 5. Create your app reservation
+## 6. Create your app reservation
 
 Go back to [developer.apple.com/account](https://developer.apple.com/account/) and choose `App Store Connect`:
 
@@ -127,7 +132,7 @@ You'll be asked for details about your new app. For platform, choose `iOS`. For 
 
 Click `Create` to complete your app reservation.
 
-## 6. Upload your app package
+## 7. Upload your app package
 
 After creating your app reservation in the last step, you'll be redirected to your app details page where you'll upload your app package, add screenshots, description of your app, and more.
 
