@@ -69,11 +69,19 @@ Add your email address and your name. You may leave `CA Email Address` empty. Ch
 
 ![image](https://user-images.githubusercontent.com/312936/138376830-23a307d3-19be-44db-bf66-18d5186afc96.png)
 
-With your CSR file saved, go to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Certificates`.
+With your CSR file saved, go to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Certificates`. Click `+` to add a new certificate:
 
 ![image](https://user-images.githubusercontent.com/312936/138376850-de8b9d84-2ee1-4906-a3f7-7dc2ebbd8d06.png)
 
-CONTINUE HERE
+Choose `Apple Distribution` and click `Continue`:
+
+(TODO: Apple distribution image)
+
+You'll be prompted to upload a Certificate Signing Request (CSR) file. Choose the file you created in the previous step and click `Continue`:
+
+(TODO: CSR file chosen)
+
+On the final certificate screen, choose `Download` to save your `.cer` certificate file to disk.
 
 ## 4. Create a Provisioning Profile
 
@@ -89,12 +97,15 @@ On the next screen, choose your desired app ID -- the Bundle ID you created in s
 
 ![image](https://user-images.githubusercontent.com/312936/138376988-9536f349-8b7a-48b2-8d1e-7b03ae9ba267.png)
 
-On the next page, you'll be asked to choose an existing certificate or create a new one. To create a new one, choose `Create Certificate`.
+On the next page, you'll be asked to choose an existing certificate. Choose the certificate you created in the previous step, then click `Continue`:
 
-On the `Create a New Certificate` page, choose `iOS Distribution (App Store and Ad Hoc)`:
+(TODO: Generate Provisioning Profile -> Choose Cert)
 
-(TODO: new cert page)
+On the final page, provide a `Provisioning Profile Name`, such as My PWA Publishing, then click `Generate`:
 
+(TODO: name provisioning profile)
+
+On the final page, choose `Download` to download you `.mobileprovision` Provisioning Profile file.
 
 ## 5. Create your app reservation
 
