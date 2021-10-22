@@ -69,17 +69,17 @@ Add your email address and your name. You may leave `CA Email Address` empty. Ch
 
 ![image](https://user-images.githubusercontent.com/312936/138376830-23a307d3-19be-44db-bf66-18d5186afc96.png)
 
-With your CSR file saved, go to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Certificates`. Click `+` to add a new certificate:
+With your `.certSigningRequest` file saved to disk, go to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Certificates`. Click `+` to add a new certificate:
 
 ![image](https://user-images.githubusercontent.com/312936/138376850-de8b9d84-2ee1-4906-a3f7-7dc2ebbd8d06.png)
 
 Choose `Apple Distribution` and click `Continue`:
 
-(TODO: Apple distribution image)
+![image](https://user-images.githubusercontent.com/312936/138388955-3776e400-60c5-4509-b2c4-38817f2abf84.png)
 
-You'll be prompted to upload a Certificate Signing Request (CSR) file. Choose the file you created in the previous step and click `Continue`:
+You'll be prompted to upload a Certificate Signing Request (`.certSigningRequest`) file. Choose the file you saved to disk in the previous step, then click `Continue`:
 
-(TODO: CSR file chosen)
+![image](https://user-images.githubusercontent.com/312936/138388987-d836fb02-55ae-4ac8-8542-dae042445375.png)
 
 On the final certificate screen, choose `Download` to save your `.cer` certificate file to disk.
 
@@ -99,11 +99,11 @@ On the next screen, choose your desired app ID -- the Bundle ID you created in s
 
 On the next page, you'll be asked to choose an existing certificate. Choose the certificate you created in the previous step, then click `Continue`:
 
-(TODO: Generate Provisioning Profile -> Choose Cert)
+![image](https://user-images.githubusercontent.com/312936/138389449-cf00a013-294a-42e8-afca-8c3660e66843.png)
 
 On the final page, provide a `Provisioning Profile Name`, such as My PWA Publishing, then click `Generate`:
 
-(TODO: name provisioning profile)
+![image](https://user-images.githubusercontent.com/312936/138389470-9a5a0f60-2ed2-4348-b78e-8ebd073a03b8.png)
 
 On the final page, choose `Download` to download you `.mobileprovision` Provisioning Profile file.
 
@@ -131,7 +131,7 @@ Click `Create` to complete your app reservation.
 
 After creating your app reservation in the last step, you'll be redirected to your app details page where you'll upload your app package, add screenshots, description of your app, and more.
 
-(TODO: image of app details page)
+![image](https://user-images.githubusercontent.com/312936/138389550-2770562d-fef5-4164-833e-337c82a0865b.png)
 
 On this page, fill our the information about your app, such as `Version`, `Description`, `Keywords`, Support URL, screenshots, and other metadata.
 
