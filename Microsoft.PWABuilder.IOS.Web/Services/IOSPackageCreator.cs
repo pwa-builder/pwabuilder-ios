@@ -13,20 +13,17 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
 {
     public class IOSPackageCreator
     {
-        private readonly SourceCodeUpdater sourceUpdater;
         private readonly ImageGenerator imageGenerator;
         private readonly TempDirectory temp;
         private readonly AppSettings appSettings;
         private readonly ILogger<IOSPackageCreator> logger;
 
         public IOSPackageCreator(
-            SourceCodeUpdater sourceUpdater, 
             ImageGenerator imageGenerator,
             IOptions<AppSettings> appSettings,
             TempDirectory temp,
             ILogger<IOSPackageCreator> logger)
         {
-            this.sourceUpdater = sourceUpdater;
             this.imageGenerator = imageGenerator;
             this.appSettings = appSettings.Value;
             this.temp = temp;
@@ -47,11 +44,14 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
                 // Make a copy of the iOS source code.
                 new DirectoryInfo(appSettings.IOSSourceCodePath).CopyContents(new DirectoryInfo(outputDir));
 
-                // Update the source files with the real values from the requested PWA
-                await this.sourceUpdater.Update(options, outputDir);
-
                 // Create any missing images for the iOS template.
+                // This should be done before project.ApplyChanges(). Otherwise, it'll attempt to write the images to the "pwa-shell" directory, which no longer exists after ApplyChanges().
                 await this.imageGenerator.Generate(options, WebAppManifestContext.From(options.Manifest, options.ManifestUri), outputDir);
+
+                // Update the source files with the real values from the requested PWA
+                var project = new XcodePwaShellProject(options, outputDir);
+                project.Load();
+                await project.ApplyChanges();
 
                 // Zip it all up.
                 var zipFile = CreateZip(outputDir);

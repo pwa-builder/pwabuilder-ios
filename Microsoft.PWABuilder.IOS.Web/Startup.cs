@@ -41,7 +41,6 @@ namespace Microsoft.PWABuilder.IOS.Web
 
             services.AddTransient<TempDirectory>();
             services.AddTransient<ImageGenerator>();
-            services.AddTransient<SourceCodeUpdater>();
             services.AddTransient<AnalyticsService>();
             services.AddTransient<IOSPackageCreator>();
             services.AddHttpClient();

@@ -8,6 +8,11 @@ namespace Microsoft.PWABuilder.IOS.Web.Common
 {
     public static class DirectoryInfoExtensions
     {
+        /// <summary>
+        /// Copies the contents of a directory to another directory.
+        /// </summary>
+        /// <param name="source">The source directory whose contents will be copied.</param>
+        /// <param name="target">The destination directory to receive the contents of the <paramref name="source"/>.</param>
         public static void CopyContents(this DirectoryInfo source, DirectoryInfo target)
         {
             var directoriesToCopy = new Queue<(DirectoryInfo source, DirectoryInfo target)>();
@@ -36,6 +41,18 @@ namespace Microsoft.PWABuilder.IOS.Web.Common
                 var (currentSrc, currentTarget) = directoriesToCopy.Dequeue();
                 enqueueSubdirectories(currentSrc, currentTarget);
             }
+        }
+
+        /// <summary>
+        /// Renames a directory.
+        /// </summary>
+        /// <param name="directory">The directory to rename.</param>
+        /// <param name="newName">The new name.</param>
+        public static void Rename(this DirectoryInfo directory, string newName)
+        {
+            var parentPath = directory.Parent?.FullName ?? string.Empty;
+            var destination = Path.Combine(parentPath, newName);
+            directory.MoveTo(destination);
         }
     }
 }

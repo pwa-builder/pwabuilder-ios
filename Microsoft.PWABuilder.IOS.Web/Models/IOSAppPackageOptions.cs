@@ -118,8 +118,8 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
                 .Select(url => url!)
                 .ToList();
             return new Validated(
-                Name, 
-                BundleId,
+                Name.Trim(), 
+                BundleId.Trim(),
                 uri, 
                 imageUri, 
                 validSplashColor, 
@@ -132,7 +132,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
    
         private static Color GetValidColor(string? desiredColor, string? manifestColor, string fallbackColor)
         {
-            var colors = new[] { desiredColor, manifestColor, fallbackColor };
+            var colors = new[] { desiredColor?.Trim(), manifestColor?.Trim(), fallbackColor };
             foreach (var color in colors)
             {
                 if (Color.TryParseHexColor(color, out var validColor))
