@@ -62,7 +62,9 @@ Click `Continue` and then `Register` to finish creating your Bundle ID.
 
 ## 3. Create a Certificate Signing Request (CSR)
 
-On your Mac, launch `Keychain Access` app. From the top menu bar, choose `Keychain Access` -> `Certificate Assistant` -> `Request a Certificate from a Certificate Authority`
+On your Mac, launch `Keychain Access` app. 
+
+From the top menu bar, choose `Keychain Access` -> `Certificate Assistant` -> `Request a Certificate from a Certificate Authority`
 
 ![image](https://user-images.githubusercontent.com/312936/138376813-73100ac3-832a-4fda-8f9d-583b0517a398.png)
 
@@ -78,9 +80,9 @@ Go to your [Apple Developer Account page](https://developer.apple.com/account) a
 
 ![image](https://user-images.githubusercontent.com/312936/138376850-de8b9d84-2ee1-4906-a3f7-7dc2ebbd8d06.png)
 
-Choose `iOS Distribution (App Store and Ad Hoc)` and click `Continue`:
+Choose `Apple Distribution` and click `Continue`:
 
-![image](https://user-images.githubusercontent.com/312936/138390093-3d43f913-3bb5-4599-9428-d3f835806b92.png)
+![image](https://user-images.githubusercontent.com/312936/138535541-a1ffc1d6-2fa5-429f-98b2-bc6108393866.png)
 
 You'll be prompted to upload a Certificate Signing Request (`.certSigningRequest`) file. Choose the file you saved to disk in the previous step, then click `Continue`:
 
@@ -106,11 +108,11 @@ On the next page, you'll be asked to choose an existing certificate. Choose the 
 
 ![image](https://user-images.githubusercontent.com/312936/138389449-cf00a013-294a-42e8-afca-8c3660e66843.png)
 
-On the final page, provide a `Provisioning Profile Name`, such as My PWA Publishing, then click `Generate`:
+On the next page, you'll be asked for `Provisioning Profile Name`. Use your `Bundle ID` (e.g. com.mydomain.myapp) as the name, then click `Generate`:
 
-![image](https://user-images.githubusercontent.com/312936/138389470-9a5a0f60-2ed2-4348-b78e-8ebd073a03b8.png)
+![image](https://user-images.githubusercontent.com/312936/138535867-4d2cf78b-de43-4b4f-b096-ebabae697254.png)
 
-On the final page, choose `Download` to download you `.mobileprovision` Provisioning Profile file.
+On the final page, choose `Download` to download your `.mobileprovision` Provisioning Profile file.
 
 ## 6. Create your app reservation
 
@@ -144,33 +146,48 @@ When you're ready to upload your PWA app package, you'll submit your package by 
 
 Each step is described below.
 
-### Sign into Xcode
+#### Sign into Xcode
 
 Go to `Xcode` menu -> `Preferences`:
 
-(TODO: image of Xcode preferences menu)
+![image](https://user-images.githubusercontent.com/312936/138536067-df7e0276-bda2-4e29-ac1f-231324435af6.png)
 
-In the Preferences dialog, choose `Accounts`. If your Apple Developer account isn't listed, click the `+` button to add it to Xcode.
+In the Preferences dialog, choose `Accounts`. If your Apple Developer account isn't listed, click the `+` button to add it to Xcode:
+
+![image](https://user-images.githubusercontent.com/312936/138536011-f8d4d24d-e3c2-4eae-a245-933ba8a49103.png)
 
 Once you've signed into your Apple Developer account in Xcode, dismiss the Preferences dialog.
 
-### Assign your project to your account
+#### Assign your project to your account
 
-In Xcode, choose choose `Project Navigator (📁)` -> `pwa-shell` -> `Signing & Capabilities` -> Team. Choose a team
+In Xcode, choose choose `Project Navigator (📁)` -> `[your app name]` -> `Build Settings`:
 
-> 💁🏽‍♀️ Heads up
->
-> If you receive an error saying, "Failed to create provisioning profile. There are no devices registered in your account...", then you'll need to register an iOS device to your account. To do that, go to https://developer.apple.com/account/resources/devices/list and register a device.
+![image](https://user-images.githubusercontent.com/312936/138536316-baaad18c-5706-40bd-8a21-14e46225c6d4.png)
 
-Create an archive in Xcode
+Scroll down to the `Signing` section, and set `Code Signing Identity` -> `Release` to `Apple Distribution`:
 
-Open `pwa-shell.xcworkspace` file in Xcode. With your PWA project opened in Xcode, choose `pwa-shell` -> `pwa-shell` -> `Any iOS Device (arm64)`:
+![image](https://user-images.githubusercontent.com/312936/138536454-1a11dc69-0340-4391-acc3-8ff5e303729d.png)
 
-(TODO: image of Any iOS Device)
+Then set `Code Signing Style` -> `Release` to `Manual`:
 
-Then from the Xcode menu bar, choose `Product` -> `Archive`:
+![image](https://user-images.githubusercontent.com/312936/138536492-e21a7cd9-1664-4909-8966-9c4ccdca2c2d.png)
 
-(TODO: image of Product->Archive)
+Finally, set `Development Team` -> `Release` to your Apple Developer account team:
 
+![image](https://user-images.githubusercontent.com/312936/138536529-86a1f46d-8417-44f0-b72e-229aa8d36856.png)
 
+On the same project page, choose `Signing & Capabilities` -> `Release`:
 
+![image](https://user-images.githubusercontent.com/312936/138536678-0507aa82-88c3-4508-a87a-75bb5db3eb70.png)
+
+Under `Provisioning Profile`, choose `Download Profile...`:
+
+![image](https://user-images.githubusercontent.com/312936/138536799-650f408d-216c-455d-b3cc-316de71ce055.png)
+
+On the download profile prompt, choose the profile you created in the previous steps.
+
+#### Create an archive
+
+On the top menu bar of Xcode where you see your iPhone simulator name, choose the simulator name, and select `Any iOS Device (arm64)`:
+
+![image](https://user-images.githubusercontent.com/312936/138537055-7e558abb-7b31-4d9d-b3bd-1794fe267742.png)
