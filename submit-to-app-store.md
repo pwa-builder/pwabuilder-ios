@@ -16,7 +16,7 @@ Each step is described below.
 
 ## 1. Sign into your Apple Developer account
 
-To submit to the App Store, [sign-in to your Apple Developer Account](https://developer.apple.com/account/).
+To submit your app the iOS App Store, [sign-in to your Apple Developer Account](https://developer.apple.com/account/).
 
 If you don't have an Apple Developer account, [enroll here](https://developer.apple.com/programs/enroll). Enrollment costs $99 USD/year, though [non-profits can have this fee waived](https://developer.apple.com/support/membership-fee-waiver/).
 
@@ -106,7 +106,7 @@ On the New Provisioning Profile page, choose `App Store`, and click `Continue`:
 
 ![image](https://user-images.githubusercontent.com/312936/138376946-84c4cae2-d85e-4e29-8b48-e5eec81e4815.png)
 
-On the next screen, choose your desired app ID -- the Bundle ID you created in step 1 -- then click `Continue`:
+On the next screen, choose your desired app ID -- the Bundle ID you created in step 2 -- then click `Continue`:
 
 ![image](https://user-images.githubusercontent.com/312936/138376988-9536f349-8b7a-48b2-8d1e-7b03ae9ba267.png)
 
@@ -198,7 +198,7 @@ On the top menu bar of Xcode where you see your iPhone simulator name, choose th
 
 ![image](https://user-images.githubusercontent.com/312936/138537055-7e558abb-7b31-4d9d-b3bd-1794fe267742.png)
 
-Then from the top menu, choose `Build` -> `Archive`:
+Then from the top menu, choose `Product` -> `Archive`:
 
 ![image](https://user-images.githubusercontent.com/312936/138537627-c443aa49-a82b-45de-b750-00affa0e2cf1.png)
 
