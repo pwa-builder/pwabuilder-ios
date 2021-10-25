@@ -1,6 +1,6 @@
 ﻿# Submitting your PWA to the iOS App Store
 
-Once you've packaged your PWA for iOS using [PWABuilder](https://www.pwabuilder.com) and [followed the steps to build your iOS app package](/next-steps.md), you can submit your app to the iOS App Store.
+Once you've packaged your PWA for iOS using [PWABuilder](https://www.pwabuilder.com) and [followed the steps to build your iOS app package](/next-steps.md#1-build-your-project-in-xcode), you can submit your app to the iOS App Store.
 
 The process looks like this:
 
