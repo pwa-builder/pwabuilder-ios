@@ -191,3 +191,15 @@ On the download profile prompt, choose the profile you created in the previous s
 On the top menu bar of Xcode where you see your iPhone simulator name, choose the simulator name, and select `Any iOS Device (arm64)`:
 
 ![image](https://user-images.githubusercontent.com/312936/138537055-7e558abb-7b31-4d9d-b3bd-1794fe267742.png)
+
+Then from the top menu, choose `Build` -> `Archive`:
+
+![image](https://user-images.githubusercontent.com/312936/138537627-c443aa49-a82b-45de-b750-00affa0e2cf1.png)
+
+When the archive process finishes, the Archive window will appear:
+
+![image](https://user-images.githubusercontent.com/312936/138537562-23d336c1-c79e-4e1d-bb49-b798ead440f5.png)
+
+Choose `Distribute App` -> `App Store Connect` -> `Upload`.
+
+Follow the prompts to complete your upload to the App Store Connect.
