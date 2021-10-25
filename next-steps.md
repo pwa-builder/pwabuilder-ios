@@ -4,12 +4,12 @@ You've successfully generated an iOS app package for your PWA. 😎
 Your next steps:
 1. **Build your project** in Xcode
 2. **Test your app**: Run your project in Xcode to try out your PWA on an iPhone simulator or physical iOS device.
-3. **Submit your app to the App Store**
+3. **Submit your app to the iOS App Store**
 
 What you'll need:
 
 - A **Mac with Xcode installed** (For details, see [our FAQ](/faq.md#can-i-publish-to-the-app-store-without-a-mac).)
-- An **Apple Developer Account**
+- An **[Apple Developer Account](/submit-to-app-store.md#1-sign-into-your-apple-developer-account)** to publish your app to the App Store.
 
 Each step is explained below.
 
@@ -27,17 +27,17 @@ Unzip the `src` folder and open a terminal in `src` and execute the following co
 
 Then, open the `src/[your PWA name].xcworkspace` file.
 
-This will open the project in Xcode. In Xcode, click the `Product` > `Build` to build your project.
+This will open the project in Xcode. In Xcode, click `Product` > `Build` to build your project.
 
 ## 2. Test your app an iPhone simulator
 
-With the project opened in Xcode, click ▶️ to run your PWA in an iPhone simulator. You can also choose other iOS simulators to try our your app on those devices.
+With the project opened in Xcode, click ▶️ to run your PWA in an iPhone simulator. You may also choose other iOS simulators to try our your app on those devices.
 
-## 3. Upload your app to the App Store
+## 3. Upload your app to the iOS App Store
 
-Once you've built and tested your app, it's ready to be uploaded to the App Store.
+Once you've built and tested your app, it's ready to be uploaded to the iOS App Store.
 
-See [Submit your PWA to App Store](/submit-to-app-store.md) for step-by-step guide to publishing your PWA iOS package to the App Store.
+See [Submit your PWA to the iOS App Store](/submit-to-app-store.md) for a step-by-step guide to publishing your PWA iOS package to the iOS App Store.
 
 ### Disclaimer: Preview
 
