@@ -14,15 +14,26 @@ This includes [service worker support](https://love2dev.com/blog/apple-ships-ser
 
 To get a glimpse of PWA support on iOS, we recommend [Maximiliano Firtman's posts on the subject](https://firt.dev/tags/ios/).
 
+Currently, our iOS template doesn't support some PWA functionality like shortcuts. We'd be glad to accept PRs to add PWA functionality. Our goal is to make this template as close to a full-featured PWA as possible.
+
+## Can I get my PWA in the Mac Store?
+
+Yes. 
+
+In [Apple App Store Connect](https://appstoreconnect.apple.com/apps), choose your app. Then under `Pricing & Availability`, choose `Make this app available for MacOS App Store:
+
+![image](https://user-images.githubusercontent.com/312936/138754831-17de3a87-5a8a-47c3-8137-331125ced1e0.png)
+
 ## How can I debug my PWA?
 
 You can open Safari Dev Tools while your PWA is running in your iPhone simulator.
 
-1. Open your pwa-shell.xcworkspace file in Xcode.
+1. Open your .xcworkspace file in Xcode.
 2. Click ▶ to run your PWA inside the iPhone simulator.
 3. Open Safari
 4. In the top menu bar, choose `Develop` -> `Simulator [device name]` -> `[Your PWA's URL]`
-5. Safari's dev tools will open, allowing you to debug your PWA, execute arbitrary JS, etc.
+![image](https://user-images.githubusercontent.com/312936/138755619-c7a0cb7a-c96d-4640-a808-3aae24e9b1ef.png)
+5. Safari's dev tools will open, allowing you to debug your PWA, execute arbitrary JS, set breakpoints, etc.
 
 ## Can I customize my source code?
 

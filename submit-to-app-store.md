@@ -90,9 +90,15 @@ You'll be prompted to upload a Certificate Signing Request (`.certSigningRequest
 
 On the final certificate screen, choose `Download` to save your `.cer` certificate file to disk.
 
+To install this `.cer` file, open `Keychain Access` app and drag the `.cer` file onto the list of certificates:
+
+![image](https://user-images.githubusercontent.com/312936/138757045-42335e86-76c2-4432-abc5-a73f48cefa7c.png)
+
+You should see the certificate appear in the list.
+
 ## 5. Create a Provisioning Profile
 
-Go back to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Profiles`. Then click `+` to create a new Provisioning Provile:
+Go back to your [Apple Developer Account page](https://developer.apple.com/account) and choose `Certificates, Identifiers & Profiles` -> `Profiles`. Then click `+` to create a new Provisioning Profile:
 
 ![image](https://user-images.githubusercontent.com/312936/138376889-6f87cd34-f416-4b19-8efb-8514375e2978.png)
 
@@ -146,7 +152,7 @@ When you're ready to upload your PWA app package, you'll submit your package by 
 
 Each step is described below.
 
-#### Sign into Xcode
+#### Uploading your package: Sign into Xcode
 
 Go to `Xcode` menu -> `Preferences`:
 
@@ -158,7 +164,7 @@ In the Preferences dialog, choose `Accounts`. If your Apple Developer account is
 
 Once you've signed into your Apple Developer account in Xcode, dismiss the Preferences dialog.
 
-#### Assign your project to your account
+#### Uploading your package: Assign your project to your account
 
 In Xcode, choose choose `Project Navigator (📁)` -> `[your app name]` -> `Build Settings`:
 
@@ -186,7 +192,7 @@ Under `Provisioning Profile`, choose `Download Profile...`:
 
 On the download profile prompt, choose the profile you created in the previous steps.
 
-#### Create an archive
+#### Uploading your package: Create an archive
 
 On the top menu bar of Xcode where you see your iPhone simulator name, choose the simulator name, and select `Any iOS Device (arm64)`:
 
@@ -202,4 +208,22 @@ When the archive process finishes, the Archive window will appear:
 
 Choose `Distribute App` -> `App Store Connect` -> `Upload`.
 
-Follow the prompts to complete your upload to the App Store Connect.
+Follow the prompts to complete your upload to the App Store Connect:
+
+![image](https://user-images.githubusercontent.com/312936/138749331-da7d7a6f-c5ca-49e8-b88d-f39f5d9b7b61.png)
+
+Congrats, you've uploaded your PWA to App Store Connect. 😎
+
+## Submit for Review
+
+Go to [appstoreconnect.apple.com/apps](https://appstoreconnect.apple.com/apps) and select your app. Scroll down to `Build` section and choose `Select a build before you submit your app`:
+
+![image](https://user-images.githubusercontent.com/312936/138750856-18f7f63d-b816-4da6-95f2-c59a9c408c62.png)
+
+Choose the archive you created in the previous step.
+
+When you've finished preparing for submission (pricing, screenshots, localization etc.), choose `Submit for Review` to complete your submission:
+
+![image](https://user-images.githubusercontent.com/312936/138752930-1a23107a-5e71-4c74-9d0e-a290502d78ca.png)
+
+App reviews typically take 24-48 hours. Once approved, your PWA will be listed in the iOS App Store.
