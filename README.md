@@ -100,6 +100,6 @@ You may also generate a package manually by POSTing to `/packages/create` with t
 }
 ```
 
-For more information about the JSON arguments, see [IOSPackageOptions](https://github.com/pwa-builder/pwabuilder-ios/blob/main/Microsoft.PWABuilder.IOS.Web/Models/IOSAppPackageOptions.cs#L101).
+For more information about the JSON arguments, see [IOSPackageOptions](https://github.com/pwa-builder/pwabuilder-ios/blob/main/Microsoft.PWABuilder.IOS.Web/Models/IOSAppPackageOptions.cs).
 
 The response will be a zip file containing the generated app solution, which can be compiled in Xcode.
