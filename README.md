@@ -1,6 +1,6 @@
-# pwabuilder-ios
+# PWABuilder iOS Platform
 
-This is PWABuilder's iOS platform that generates an iOS app that loads your PWA in a WKWebView.
+This is PWABuilder's iOS platform that generates an iOS app that loads your PWA in a WKWebView. The platform generates a zip file containing an Xcode project that you can compile on your Mac and publish to the App Store.
 
 # Architecture
 
