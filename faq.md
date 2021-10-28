@@ -79,6 +79,14 @@ Some time ago, PWABuilder had an iOS platform based on the now-deprecated UIWebV
 
 This new template is a fresh take on a PWA iOS app using modern iOS technologies and integrating more PWA features where possible.
 
+## How is this different than Apache Cordova?
+
+Apache Cordova is a broader platform that aims to expose native capabilities to your web app through a special runtime and plugins.
+
+PWA's iOS platform is more narrow in scope, aiming to make your PWA run well, with as many PWA capabilities as we can build, on iOS. Really, ours is more like a polyfill for PWAs on iOS: giving you some PWA functionality where iOS is lacking. We make it easy to publish your PWA to the iOS App Store without any changes to your PWA code.
+
+If Cordova's broader approach is the right tool for your PWA on iOS, by all means use it.
+
 ### Need more help?
 
 If you're stuck, the PWABuilder team would be glad to point you in the right direction. [Open an issue](https://github.com/pwa-builder/PWABuilder/issues/new?assignees=&labels=ios-platform,question%20%3Agrey_question%3A&body=Type%20your%20question%20here.%20Please%20include%20the%20URL%20to%20your%20PWA.%0A%0A%3E%20If%20my%20answer%20was%20in%20the%20docs%20all%20along%2C%20I%20promise%20to%20give%20%245%20USD%20to%20charity.) and we'll help walk you through it.
