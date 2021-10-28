@@ -67,6 +67,10 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
 
         public Validated Validate()
         {
+            if (!Uri.TryCreate(ManifestUrl, UriKind.Absolute, out var manifestUri))
+            {
+                throw new ArgumentException("Manifest url must a valid, absolute URI");
+            }
             if (string.IsNullOrWhiteSpace(Name))
             {
                 throw new ArgumentNullException(nameof(Name));
@@ -75,7 +79,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             {
                 throw new ArgumentNullException(nameof(Url));
             }
-            if (!Uri.TryCreate(Url, UriKind.Absolute, out var uri))
+            if (!Uri.TryCreate(manifestUri, Url, out var uri))
             {
                 throw new ArgumentException("Url must be a valid, absolute URI");
             }
@@ -83,18 +87,13 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             {
                 throw new ArgumentNullException(nameof(ImageUrl));
             }
-            if (!Uri.TryCreate(ImageUrl, UriKind.Absolute, out var imageUri))
+            if (!Uri.TryCreate(manifestUri, ImageUrl, out var imageUri))
             {
                 throw new ArgumentException("Image url must be a valid, absolute URI");
             }
             if (Manifest == null)
             {
                 throw new ArgumentNullException(nameof(Manifest));
-            }
-            Uri.TryCreate(ManifestUrl, UriKind.Absolute, out var manifestUri);
-            if (manifestUri == null)
-            {
-                throw new ArgumentException("Manifest url must a valid, absolute URI");
             }
             if (string.IsNullOrWhiteSpace(BundleId))
             {
