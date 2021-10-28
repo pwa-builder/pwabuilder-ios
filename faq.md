@@ -28,6 +28,18 @@ We'd be glad to accept PRs to add PWA functionality. Our goal is to make this te
 
 To get a glimpse of general PWA support on iOS, we recommend [Maximiliano Firtman's posts on the subject](https://firt.dev/tags/ios/).
 
+### Can I use Push Notifications?
+
+We currently don't support push notifications. We have partial support in the platform for enabling push notifications via Firebase, but the code is currently commented out, and PWABuilder has no UI for letting you input your push notification details.
+
+If Push Notification support is important to you, [upvote this issue](https://github.com/pwa-builder/pwabuilder-ios/issues/6).
+
+### How do updates work?
+
+Since your PWA is being loaded in a web view, pushing changes to your web app will automatically be reflected in your iOS app. No App Store resubmission required.
+
+If you need to make changes to the iOS app itself -- for example, adding new iOS-specific capabilities, or otherwise modifying your app template -- only then you'll need to submit an update to your App Store listing.
+
 ### Can I get my PWA in the *Mac* Store?
 
 Yes. While this template is designed for the iOS App Store, you can additionally publish to the Mac App Store.
