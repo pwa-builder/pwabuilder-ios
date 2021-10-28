@@ -67,6 +67,7 @@
     </scenes>
     <resources>
         <image name="LaunchIcon" width="64" height="64"/>
+        <image name="wifi.slash" catalog="system" width="128" height="108"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
