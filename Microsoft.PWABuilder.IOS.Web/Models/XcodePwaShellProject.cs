@@ -154,6 +154,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             GetFile("Main.storyboard").Replace(oldModuleName, swiftModuleName);
             GetFile("project.pbxproj").Replace(oldModuleName, swiftModuleName);
             GetFile("pwa-shell.xcscheme").Replace(oldModuleName, swiftModuleName);
+            GetFile("AppDelegate.swift").Replace(oldModuleName, swiftModuleName);
         }
 
         // TODO: When we want to enable push notifications, revisit this.

@@ -70,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         completionHandler(UIBackgroundFetchResult.newData)
       }
+
       // [END receive_message]
       func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Unable to register for remote notifications: \(error.localizedDescription)")
@@ -77,35 +78,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
       // Handle deep links into our app.
       // See https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app
-      // func application(_ application: UIApplication,
-      //            continue userActivity: NSUserActivity,
-      //            restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-      //     // Get URL components from the incoming user activity.
-      //     guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-      //         let incomingURL = userActivity.webpageURL,
-      //         let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
-      //         return false
-      //     }
+      func application(_ application: UIApplication,
+             continue userActivity: NSUserActivity,
+             restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+      
+      // Ensure we're trying to launch a link.
+      guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+          let incomingURL = userActivity.webpageURL else {
+          return false
+      }       
 
-      //     // Check for specific URL components that you need.
-      //     guard let path = components.path,
-      //     let params = components.queryItems else {
-      //         return false
-      //     }    
-      //     print("path = \(path)")
-
-      //     if let albumName = params.first(where: { $0.name == "albumname" } )?.value,
-      //         let photoIndex = params.first(where: { $0.name == "index" })?.value {
-
-      //         print("album = \(albumName)")
-      //         print("photoIndex = \(photoIndex)")
-      //         return true
-
-      //     } else {
-      //         print("Either album name or photo index missing")
-      //         return false
-      //     }
-      // }
+      // Handle it inside our web view.
+      let handledRequest = URLRequest(url: incomingURL)
+      PWAShell.webView.load(handledRequest)
+      return true
+    }
 
       // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
       // If swizzling is disabled then this function must be implemented so that the APNs token can be paired to
