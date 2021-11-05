@@ -20,6 +20,7 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
         
     }
     config.preferences.javaScriptCanOpenWindowsAutomatically = true
+    config.allowsInlineMediaPlayback = true
     
     let webView = WKWebView(frame: calcWebviewFrame(webviewView: container, toolbarView: nil), configuration: config)
     
@@ -32,7 +33,7 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     webView.navigationDelegate = WKND;
 
     webView.scrollView.bounces = false;
-    webView.allowsBackForwardNavigationGestures = false
+    webView.allowsBackForwardNavigationGestures = true
     
 
     webView.scrollView.contentInsetAdjustmentBehavior = .never
