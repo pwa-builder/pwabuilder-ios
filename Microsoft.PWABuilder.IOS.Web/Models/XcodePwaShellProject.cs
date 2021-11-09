@@ -98,6 +98,12 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             var entitlementsAppUrlExisting = "<string>applinks:pwashellz.com</string>";
             var entitlementsAppUrlDesired = $"<string>applinks:{options.Url.Host}</string>";
             entitlementsFile.Replace(entitlementsAppUrlExisting, entitlementsAppUrlDesired);
+
+            // Update webcredentials URL in Entitlements.plist. This lets the PWA app share credentials with the domain.
+            // See https://developer.apple.com/documentation/xcode/supporting-associated-domains
+            var entitlementsWebcredentialsUrlExisting = "<string>webcredentials:pwashellz.com</string>";
+            var entitlementsWebcredentialsUrlDesired = $"<string>webcredentials:{options.Url.Host}</string>";
+            entitlementsFile.Replace(entitlementsWebcredentialsUrlExisting, entitlementsWebcredentialsUrlDesired);
         }
 
         private void UpdateAppBundleId()

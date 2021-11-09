@@ -7,6 +7,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:pwashellz.com</string>
+		<string>webcredentials:pwashellz.com</string>
 	</array>
 </dict>
 </plist>
