@@ -71,7 +71,21 @@ Then, make changes to the code to make use of that ability.
 
 ### Are Push Notifications supported?
 
-Not currently. We have plans to enable that in a future release if enough developers want this. If this issue is important to you, please [let us know](https://github.com/pwa-builder/PWABuilder/issues/new?assignees=&labels=enhancement%20%3Asparkles%3A,ios-platform&body=I%20would%20like%20to%20see%20PWABuilder%20iOS%20platform%20support%20push%20notifications.&title=ios%20push%20notifications).
+Not yet. We have plans to enable that in a future release if enough developers want this. If this issue is important to you, please [👍 this issue](https://github.com/pwa-builder/pwabuilder-ios/issues/6).
+
+### How is this different from the old PWABuilder iOS platform?
+
+Some time ago, PWABuilder had an iOS platform based on the now-deprecated UIWebView. The template lacked a number of PWA integrations, and because it used deprecated technology, couldn't take advantage of new WebKit capabilities, such as service worker support via [App-Bound Domains](https://webkit.org/blog/10882/app-bound-domains/).
+
+This new template is a fresh take on a PWA iOS app using modern iOS technologies and integrating more PWA features where possible.
+
+## How is this different than Apache Cordova?
+
+Apache Cordova is a broader platform that aims to expose native capabilities to your web app through a special runtime and plugins.
+
+PWA's iOS platform is more narrow in scope, aiming to make your PWA run well, with as many PWA capabilities as we can build, on iOS. Really, ours is more like a polyfill for PWAs on iOS: giving you some PWA functionality where iOS is lacking. We make it easy to publish your PWA to the iOS App Store without any changes to your PWA code.
+
+If Cordova's broader approach is the right tool for your PWA on iOS, by all means use it.
 
 ### Need more help?
 
