@@ -382,6 +382,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwa.shell;
 				PRODUCT_NAME = PWAShell;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -410,6 +411,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwa.shell;
 				PRODUCT_NAME = PWAShell;
 				SUPPORTS_MACCATALYST = YES;
