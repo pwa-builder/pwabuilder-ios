@@ -20,6 +20,7 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
         
     }
     config.preferences.javaScriptCanOpenWindowsAutomatically = true
+    config.allowsInlineMediaPlayback = true
     
     let webView = WKWebView(frame: calcWebviewFrame(webviewView: container, toolbarView: nil), configuration: config)
     
@@ -32,7 +33,7 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     webView.navigationDelegate = WKND;
 
     webView.scrollView.bounces = false;
-    webView.allowsBackForwardNavigationGestures = false
+    webView.allowsBackForwardNavigationGestures = true
     
 
     webView.scrollView.contentInsetAdjustmentBehavior = .never
@@ -70,9 +71,24 @@ func calcWebviewFrame(webviewView: UIView, toolbarView: UIToolbar?) -> CGRect{
     else {
         let winScene = UIApplication.shared.connectedScenes.first
         let windowScene = winScene as! UIWindowScene
-        let statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 0
+        var statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 0
         
-        return CGRect(x: 0, y: statusBarHeight, width: webviewView.frame.width, height: webviewView.frame.height - statusBarHeight)
+        switch displayMode {
+        case "fullscreen":
+            #if targetEnvironment(macCatalyst)
+                if let titlebar = windowScene.titlebar {
+                    titlebar.titleVisibility = .hidden
+                    titlebar.toolbar = nil
+                }
+            #endif
+            return CGRect(x: 0, y: 0, width: webviewView.frame.width, height: webviewView.frame.height)
+        default:
+            #if targetEnvironment(macCatalyst)
+            statusBarHeight = 29
+            #endif
+            let windowHeight = webviewView.frame.height - statusBarHeight
+            return CGRect(x: 0, y: statusBarHeight, width: webviewView.frame.width, height: windowHeight)
+        }
     }
 }
 

@@ -1,33 +1,39 @@
 {
-  "images": [
+  "images" : [
     {
-      "filename": "launch-64.png",
-      "idiom": "universal",
-      "scale": "1x"
-    },
-    {
-      "filename": "launch-128.png",
-      "idiom": "universal",
-      "scale": "2x"
+      "compression-type" : "automatic",
+      "filename" : "launch-64.png",
+      "idiom" : "universal",
+      "scale" : "1x"
     },
     {
-      "filename": "launch-192.png",
-      "idiom": "universal",
-      "scale": "3x"
+      "compression-type" : "automatic",
+      "filename" : "launch-128.png",
+      "idiom" : "universal",
+      "scale" : "2x"
     },
-	{
-      "filename": "launch-256.png",
-      "idiom": "universal",
-      "scale": "4x"
+    {
+      "compression-type" : "automatic",
+      "filename" : "launch-192.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     },
-	{
-      "filename": "launch-512.png",
-      "idiom": "universal",
-      "scale": "8x"
+    {
+      "filename" : "launch-256.png",
+      "idiom" : "universal",
+      "scale" : "4x"
+    },
+    {
+      "filename" : "launch-512.png",
+      "idiom" : "universal",
+      "scale" : "8x"
     }
   ],
-  "info": {
-    "author": "xcode",
-    "version": 1
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "automatic"
   }
 }

@@ -20,6 +20,7 @@ let authOrigins: [String] = ["login.microsoftonline.com"]
 
 let platformCookie = Cookie(name: "app-platform", value: "iOS App Store")
 
+let displayMode = "standalone" //standalone / fullscreen
 
 //let statusBarColor = "#FFFFFF"
 //let statusBarStyle = UIStatusBarStyle.lightContent
