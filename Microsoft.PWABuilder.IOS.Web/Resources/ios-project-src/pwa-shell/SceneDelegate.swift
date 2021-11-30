@@ -12,6 +12,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
+    // Handle universal links into our app.
+    // This allows your PWA to open links to your domain, rather than opening in a browser tab.
+    // See https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity,restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        // Ensure we're trying to launch a link.
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let incomingURL = userActivity.webpageURL else {
+            return false
+        }       
+
+        // Handle it inside our web view.
+        let handledRequest = URLRequest(url: incomingURL)
+        PWAShell.webView.load(handledRequest)
+        return true
+    }
+
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
