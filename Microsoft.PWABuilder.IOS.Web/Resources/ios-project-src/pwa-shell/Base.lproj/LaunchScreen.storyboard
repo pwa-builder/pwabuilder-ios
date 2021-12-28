@@ -23,7 +23,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XpK-Bq-A7U"/>
-                        <color key="backgroundColor" red="0.22232502700000001" green="0.4557446241" blue="0.7985594869" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        {{PWABuilder.iOS.splashBgColor}}
                         <constraints>
                             <constraint firstItem="I2s-HW-Q4d" firstAttribute="centerY" secondItem="4mO-e4-REQ" secondAttribute="centerY" id="4kv-Qc-mPU"/>
                             <constraint firstItem="I2s-HW-Q4d" firstAttribute="centerX" secondItem="4mO-e4-REQ" secondAttribute="centerX" id="6Z0-rS-c8Q"/>

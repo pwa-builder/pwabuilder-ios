@@ -11,7 +11,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>PWAShellz</string>
+	<string>{{PWABuilder.iOS.appName}}</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -96,7 +96,7 @@
 	<true/>
 	<key>WKAppBoundDomains</key>
 	<array>
-		<string>webboard.app/?pwashellz</string>
+		<string>{{PWABuilder.iOS.permittedUrls}}</string>
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>

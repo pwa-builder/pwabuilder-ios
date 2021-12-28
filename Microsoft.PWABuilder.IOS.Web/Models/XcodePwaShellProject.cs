@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.PWABuilder.IOS.Web.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,18 +41,18 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             var mainStoryboard = GetFile("Main.storyboard");
 
             // Set the splash color.
-            var existingSplashColorLine = "<color key=\"backgroundColor\" red=\"0.0\" green=\"0.0\" blue=\"1\" alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
+            var existingSplashColorLine = "{{PWABuilder.iOS.splashBgColor}}";
             var desiredSplashColorLine = $"<color key=\"backgroundColor\" {options.SplashColor.ToStoryboardColorString()} alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
             launchScreenStoryboard.Replace(existingSplashColorLine, desiredSplashColorLine);
             mainStoryboard.Replace(existingSplashColorLine, desiredSplashColorLine);
 
             // Set the status bar color
-            var existingStatusBarColorLine = "<color key=\"backgroundColor\" red=\"0.0\" green=\"1\" blue=\"0.0\" alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
+            var existingStatusBarColorLine = "{{PWABuilder.iOS.statusBarColor}}";
             var desiredStatusBarColorLine = $"<color key=\"backgroundColor\" {options.StatusBarColor.ToStoryboardColorString()} alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
             mainStoryboard.Replace(existingStatusBarColorLine, desiredStatusBarColorLine);
 
             // Set the progress var color
-            var existingProgressBarColorLine = "<color key=\"tintColor\" red=\"0.0\" green=\"0.0\" blue=\"1\" alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
+            var existingProgressBarColorLine = "{{PWABuilder.iOS.progressBarColor}}";
             var desiredProgressBarColorLine = $"<color key=\"tintColor\" {options.ProgressBarColor.ToStoryboardColorString()} alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
             mainStoryboard.Replace(existingProgressBarColorLine, desiredProgressBarColorLine);
         }
@@ -63,54 +64,54 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             var entitlementsFile = GetFile("Entitlements.plist");
 
             // Update app name
-            var appNameExisting = "<string>PWAShellz</string>";
+            var appNameExisting = "<string>{{PWABuilder.iOS.appName}}</string>";
             var appNameDesired = $"<string>{options.Name}</string>";
             infoPlistFile.Replace(appNameExisting, appNameDesired);
 
             // Add URL and permitted URLs to app bound domains (used for service worker) in Info.plist
-            var urlExisting = "<string>webboard.app/?pwashellz</string>";
+            var urlExisting = "<string>{{PWABuilder.iOS.permittedUrls}}</string>";
             var urlDesiredBuilder = new System.Text.StringBuilder();
             urlDesiredBuilder.Append($"<string>{options.Url.ToString().Replace("https://", string.Empty).TrimEnd('/')}</string>"); // Append the URL of the PWA
             options.PermittedUrls.ForEach(permittedUrl => urlDesiredBuilder.Append($"\r<string>{permittedUrl.ToString().Replace("https://", string.Empty).Replace("http://", string.Empty)}</string>"));
             infoPlistFile.Replace(urlExisting, urlDesiredBuilder.ToString());
 
             // Update app URL in Settings.swift
-            var settingsUrlExisting = "let rootUrl = URL(string: \"https://webboard.app/?pwashellz\")!";
-            var settingsUrlDesired = $"let rootUrl = URL(string: \"{options.Url.ToString().TrimEnd('/')}\")!";
+            var settingsUrlExisting = "{{PWABuilder.iOS.url}}";
+            var settingsUrlDesired = options.Url.ToString().TrimEnd('/');
             settingsFile.Replace(settingsUrlExisting, settingsUrlDesired);
 
             // Update allowed origin in Settings.swift
-            var allowedOriginExisting = "let allowedOrigin = \"webboard.app\"";
-            var allowedOriginDesired = $"let allowedOrigin = \"{options.Url.ToString().Replace("https://", string.Empty).TrimEnd('/')}\"";
+            var allowedOriginExisting = "{{PWABuilder.iOS.urlHost}}";
+            var allowedOriginDesired = options.Url.ToIOSHostString();
             settingsFile.Replace(allowedOriginExisting, allowedOriginDesired);
 
             // Update authOrigins in Settings.swift
-            var authOriginsExisting = "let authOrigins: [String] = [\"login.microsoftonline.com\"]";
+            var authOriginsExisting = "\"{{PWABuilder.iOS.permittedHosts}}\"";
             var authOriginsPermittedUrls = options.PermittedUrls
-                .Select(url => url.ToString().Replace(url.Scheme + "://", string.Empty).Trim('/').Trim())
+                .Select(url => url.ToIOSHostString())
                 .Select(url => $"\"{url}\"");
-            var authOriginsDesired = $"let authOrigins: [String] = [{string.Join(',', authOriginsPermittedUrls)}]";
+            var authOriginsDesired = string.Join(',', authOriginsPermittedUrls);
             settingsFile.Replace(authOriginsExisting, authOriginsDesired);
 
             // Update app URL in Entitlements.plist. This lets the PWA app handle links to the domain.
             // Note: value here must be the host only. Apple says, "Make sure to only include the desired subdomain and the top-level domain. Don’t include path and query components or a trailing slash (/)."
             // See https://developer.apple.com/documentation/xcode/supporting-associated-domains
-            var entitlementsAppUrlExisting = "<string>applinks:pwashellz.com</string>";
-            var entitlementsAppUrlDesired = $"<string>applinks:{options.Url.Host}</string>";
+            var entitlementsAppUrlExisting = "{{PWABuilder.iOS.universalLinksHost}}";
+            var entitlementsAppUrlDesired = $"applinks:{options.Url.Host}";
             entitlementsFile.Replace(entitlementsAppUrlExisting, entitlementsAppUrlDesired);
 
             // Update webcredentials URL in Entitlements.plist. This lets the PWA app share credentials with the domain.
             // See https://developer.apple.com/documentation/xcode/supporting-associated-domains
-            var entitlementsWebcredentialsUrlExisting = "<string>webcredentials:pwashellz.com</string>";
-            var entitlementsWebcredentialsUrlDesired = $"<string>webcredentials:{options.Url.Host}</string>";
+            var entitlementsWebcredentialsUrlExisting = "{{PWABuilder.iOS.sharedCredentialsHost}}";
+            var entitlementsWebcredentialsUrlDesired = $"webcredentials:{options.Url.Host}";
             entitlementsFile.Replace(entitlementsWebcredentialsUrlExisting, entitlementsWebcredentialsUrlDesired);
         }
 
         private void UpdateAppBundleId()
         {
             var projFile = GetFile("project.pbxproj");
-            var existingBundleText = "PRODUCT_BUNDLE_IDENTIFIER = com.pwa.shell;";
-            var desiredBundleText = $"PRODUCT_BUNDLE_IDENTIFIER = {options.BundleId};";
+            var existingBundleText = "{{PWABuilder.iOS.bundleId}}";
+            var desiredBundleText = options.BundleId;
             projFile.Replace(existingBundleText, desiredBundleText);
         }
 
@@ -160,7 +161,8 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             GetFile("Main.storyboard").Replace(oldModuleName, swiftModuleName);
             GetFile("project.pbxproj").Replace(oldModuleName, swiftModuleName);
             GetFile("pwa-shell.xcscheme").Replace(oldModuleName, swiftModuleName);
-            GetFile("AppDelegate.swift").Replace(oldModuleName, swiftModuleName);
+            GetFile("SceneDelegate.swift").Replace(oldModuleName, swiftModuleName);
+            //GetFile("AppDelegate.swift").Replace(oldModuleName, swiftModuleName);
         }
 
         // TODO: When we want to enable push notifications, revisit this.

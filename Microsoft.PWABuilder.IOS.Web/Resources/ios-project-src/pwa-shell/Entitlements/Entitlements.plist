@@ -6,8 +6,8 @@
 	<string>production</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:pwashellz.com</string>
-		<string>webcredentials:pwashellz.com</string>
+		<string>{{PWABuilder.iOS.universalLinksHost}}</string>
+		<string>{{PWABuilder.iOS.sharedCredentialsHost}}</string>
 	</array>
 	<key>com.apple.security.app-sandbox</key>
 	<true/>

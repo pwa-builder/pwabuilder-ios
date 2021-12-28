@@ -10,7 +10,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Common
     {
         public static void AddLatestEdgeUserAgent(this HttpClient http)
         {
-            var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41";
+            var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.57 PWABuilderHttpAgent";
             http.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
         }
     }
