@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Handle universal links into our app.
     // This allows your PWA to open links to your domain, rather than opening in a browser tab.
     // See https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity,restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         // Ensure we're trying to launch a link.
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let incomingURL = userActivity.webpageURL else {
@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Handle it inside our web view.
         let handledRequest = URLRequest(url: incomingURL)
-        PWAShell.webView.load(handledRequest)
+        PWAShell.webView.evaluateJavaScript("location.href = '\(incomingURL)'")
         return true
     }
 
