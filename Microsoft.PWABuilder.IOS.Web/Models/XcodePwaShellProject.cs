@@ -72,7 +72,11 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             // Add URL and permitted URLs to app bound domains (used for service worker) in Info.plist
             var urlExisting = "<string>{{PWABuilder.iOS.permittedUrls}}</string>";
             var urlDesiredBuilder = new System.Text.StringBuilder();
+
+            // Append the URL of the PWA
             urlDesiredBuilder.Append($"<string>{GetXmlSafeNodeValue(options.Url.ToIOSHostString())}</string>"); // Append the URL of the PWA
+
+
             options.PermittedUrls
                 .Select(url => url.ToIOSHostString())
                 .Select(url => GetXmlSafeNodeValue(url))
@@ -87,7 +91,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
 
             // Update allowed origin in Settings.swift
             var allowedOriginExisting = "{{PWABuilder.iOS.urlHost}}";
-            var allowedOriginDesired = options.Url.ToIOSHostString();
+            var allowedOriginDesired = options.Url.Host; // Should be Host here, not ToIOSHostString, as ToIOSHostString() can include query strings and URI paths.
             settingsFile.Replace(allowedOriginExisting, allowedOriginDesired);
 
             // Update authOrigins in Settings.swift
