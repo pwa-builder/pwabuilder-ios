@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Microsoft.PWABuilder.IOS.Web.Models
 {
@@ -59,21 +60,25 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
 
         private void UpdateAppNameAndUrls()
         {
-            var infoPlistFile = GetFile("Info.plist");
+            var infoPlistXmlFile = GetFile("Info.plist");
             var settingsFile = GetFile("Settings.swift");
-            var entitlementsFile = GetFile("Entitlements.plist");
+            var entitlementsXmlFile = GetFile("Entitlements.plist");
 
             // Update app name
             var appNameExisting = "<string>{{PWABuilder.iOS.appName}}</string>";
-            var appNameDesired = $"<string>{options.Name}</string>";
-            infoPlistFile.Replace(appNameExisting, appNameDesired);
+            var appNameDesired = $"<string>{GetXmlSafeNodeValue(options.Name)}</string>";
+            infoPlistXmlFile.Replace(appNameExisting, appNameDesired);
 
             // Add URL and permitted URLs to app bound domains (used for service worker) in Info.plist
             var urlExisting = "<string>{{PWABuilder.iOS.permittedUrls}}</string>";
             var urlDesiredBuilder = new System.Text.StringBuilder();
-            urlDesiredBuilder.Append($"<string>{options.Url.ToString().Replace("https://", string.Empty).TrimEnd('/')}</string>"); // Append the URL of the PWA
-            options.PermittedUrls.ForEach(permittedUrl => urlDesiredBuilder.Append($"\r<string>{permittedUrl.ToString().Replace("https://", string.Empty).Replace("http://", string.Empty)}</string>"));
-            infoPlistFile.Replace(urlExisting, urlDesiredBuilder.ToString());
+            urlDesiredBuilder.Append($"<string>{GetXmlSafeNodeValue(options.Url.ToIOSHostString())}</string>"); // Append the URL of the PWA
+            options.PermittedUrls
+                .Select(url => url.ToIOSHostString())
+                .Select(url => GetXmlSafeNodeValue(url))
+                .ToList()
+                .ForEach(url => urlDesiredBuilder.Append($"\r<string>{url}</string>"));
+            infoPlistXmlFile.Replace(urlExisting, urlDesiredBuilder.ToString());
 
             // Update app URL in Settings.swift
             var settingsUrlExisting = "{{PWABuilder.iOS.url}}";
@@ -97,14 +102,14 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             // Note: value here must be the host only. Apple says, "Make sure to only include the desired subdomain and the top-level domain. Don’t include path and query components or a trailing slash (/)."
             // See https://developer.apple.com/documentation/xcode/supporting-associated-domains
             var entitlementsAppUrlExisting = "{{PWABuilder.iOS.universalLinksHost}}";
-            var entitlementsAppUrlDesired = $"applinks:{options.Url.Host}";
-            entitlementsFile.Replace(entitlementsAppUrlExisting, entitlementsAppUrlDesired);
+            var entitlementsAppUrlDesired = $"applinks:{GetXmlSafeNodeValue(options.Url.Host)}";
+            entitlementsXmlFile.Replace(entitlementsAppUrlExisting, entitlementsAppUrlDesired);
 
             // Update webcredentials URL in Entitlements.plist. This lets the PWA app share credentials with the domain.
             // See https://developer.apple.com/documentation/xcode/supporting-associated-domains
             var entitlementsWebcredentialsUrlExisting = "{{PWABuilder.iOS.sharedCredentialsHost}}";
-            var entitlementsWebcredentialsUrlDesired = $"webcredentials:{options.Url.Host}";
-            entitlementsFile.Replace(entitlementsWebcredentialsUrlExisting, entitlementsWebcredentialsUrlDesired);
+            var entitlementsWebcredentialsUrlDesired = $"webcredentials:{GetXmlSafeNodeValue(options.Url.Host)}";
+            entitlementsXmlFile.Replace(entitlementsWebcredentialsUrlExisting, entitlementsWebcredentialsUrlDesired);
         }
 
         private void UpdateAppBundleId()
@@ -219,6 +224,20 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             }
 
             return nameBuilder.ToString();
+        }
+
+        private static string GetXmlSafeNodeValue(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return input ?? string.Empty;
+            }
+
+            // Probably a better way to do this. Maybe new System.Xml.Linq.XText(input).ToString()?
+            return new System.Xml.Linq.XElement("D", input)
+                .ToString()
+                .Replace("<D>", string.Empty)
+                .Replace("</D>", string.Empty);
         }
     }
 }
