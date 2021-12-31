@@ -104,5 +104,6 @@
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	</array>
+	<key>{{PWABuilder.iOS.shortcuts}}</key>
 </dict>
 </plist>

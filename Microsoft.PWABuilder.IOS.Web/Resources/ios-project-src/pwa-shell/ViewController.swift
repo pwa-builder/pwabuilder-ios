@@ -90,9 +90,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     @objc func loadRootUrl() {
         // Was the app launched via a universal link? If so, navigate to that.
-        // Otherwise, navigate to the app root URL.
-        let universalLinkOrRootUrl = SceneDelegate.universalLinkToLaunch ?? rootUrl;
-        PWAShell.webView.load(URLRequest(url: universalLinkOrRootUrl));
+        // Otherwise, see if we were launched via shortcut and nav to that.
+        // If neither, just nav to the main PWA URL.
+        let launchUrl = SceneDelegate.universalLinkToLaunch ?? SceneDelegate.shortcutLinkToLaunch ?? rootUrl;
+        PWAShell.webView.load(URLRequest(url: launchUrl))
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){

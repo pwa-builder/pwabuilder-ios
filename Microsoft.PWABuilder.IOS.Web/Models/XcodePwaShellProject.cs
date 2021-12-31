@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -76,13 +77,16 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             // Append the URL of the PWA
             urlDesiredBuilder.Append($"<string>{GetXmlSafeNodeValue(options.Url.ToIOSHostString())}</string>"); // Append the URL of the PWA
 
-
+            // Append the permitted URLs
             options.PermittedUrls
                 .Select(url => url.ToIOSHostString())
                 .Select(url => GetXmlSafeNodeValue(url))
                 .ToList()
-                .ForEach(url => urlDesiredBuilder.Append($"\r<string>{url}</string>"));
+                .ForEach(url => urlDesiredBuilder.Append($"\n<string>{url}</string>"));
             infoPlistXmlFile.Replace(urlExisting, urlDesiredBuilder.ToString());
+
+            // Append shortcuts
+            UpdateShortcuts(infoPlistXmlFile);
 
             // Update app URL in Settings.swift
             var settingsUrlExisting = "{{PWABuilder.iOS.url}}";
@@ -114,6 +118,32 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             var entitlementsWebcredentialsUrlExisting = "{{PWABuilder.iOS.sharedCredentialsHost}}";
             var entitlementsWebcredentialsUrlDesired = $"webcredentials:{GetXmlSafeNodeValue(options.Url.Host)}";
             entitlementsXmlFile.Replace(entitlementsWebcredentialsUrlExisting, entitlementsWebcredentialsUrlDesired);
+        }
+
+        private void UpdateShortcuts(XcodeFile infoPlistXmlFile)
+        {
+            var shortcutsTemplate = "<key>{{PWABuilder.iOS.shortcuts}}</key>";
+            var shortcuts = (this.options.Manifest.Shortcuts ?? new List<WebManifestShortcutItem>(0))
+                .Select(s => IOSAppShortcut.FromWebManifestShortcut(s, options.ManifestUri))
+                .Where(s => s != null)
+                .Select(s => s!) // because of the above null check
+                .Take(4) // iOS allows a max of 4 shortcuts
+                .ToList();
+            if (shortcuts.Count == 0)
+            {
+                // No web app manifest shortcuts? Remove the shortcuts key from Info.plist.
+                infoPlistXmlFile.Replace(shortcutsTemplate, string.Empty);
+            }
+            else
+            {
+                var shortcutsBuilder = new StringBuilder();
+                shortcutsBuilder.Append("<key>UIApplicationShortcutItems</key>\n");
+                shortcutsBuilder.Append("<array>\n");
+                shortcutsBuilder.Append(string.Join('\n', shortcuts.Select(s => s.ToInfoPlistEntry(GetXmlSafeNodeValue))));
+                shortcutsBuilder.Append("</array>");               
+
+                infoPlistXmlFile.Replace(shortcutsTemplate, shortcutsBuilder.ToString());
+            }
         }
 
         private void UpdateAppBundleId()

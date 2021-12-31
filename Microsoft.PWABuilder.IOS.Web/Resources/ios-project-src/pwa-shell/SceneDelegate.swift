@@ -7,9 +7,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // If our app is launched with a universal link, we'll store it in this variable
     static var universalLinkToLaunch: URL? = nil; 
+    static var shortcutLinkToLaunch: URL? = nil
+
 
     // This function is called when your app launches.
-    // Check to see if we were launched via a 
+    // Check to see if we were launched via a universal link or a shortcut.
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // See if our app is being launched via universal link.
         // If so, store that link so we can navigate to it once our webView is initialized.
@@ -18,6 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 SceneDelegate.universalLinkToLaunch = universalLink;
                 break
             }
+        }
+
+        // See if we were launched via shortcut
+        if let shortcutUrl = connectionOptions.shortcutItem?.type {            
+            SceneDelegate.shortcutLinkToLaunch = URL.init(string: shortcutUrl)
         }
     }
 
@@ -35,6 +42,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Handle it inside our web view in a SPA-friendly way.
         PWAShell.webView.evaluateJavaScript("location.href = '\(universalLink)'")
+    }
+
+    // This function is called if our app is already loaded and the user activates the app via shortcut
+    func windowScene(_ windowScene: UIWindowScene,
+                     performActionFor shortcutItem: UIApplicationShortcutItem,
+                     completionHandler: @escaping (Bool) -> Void) {
+        if let shortcutUrl = URL.init(string: shortcutItem.type) {
+            PWAShell.webView.evaluateJavaScript("location.href = '\(shortcutUrl)'");
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
