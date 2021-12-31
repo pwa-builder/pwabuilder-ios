@@ -14,7 +14,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
         }
 
         /// <summary>
-        /// Attempts to create 
+        /// Attempts to create an iOS app shortcut from a W3C web manifest shortcut.
         /// </summary>
         /// <param name="webManifestShortcut">The web manifest shortcut to try to convert to an iOS app shortcut.</param>
         /// <param name="webManifestUri">The URI of the web manifest, used for resolving relative shortcut URIs to absolute URIs.</param>
