@@ -20,9 +20,9 @@ Unlike Google Play and Microsoft Store, Apple's App Store doesn't natively suppo
 
 To bridge this gap, your PWA runs in a [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview) hosted inside a native Swift app. Generally, features that work in iOS Safari will work in your PWA.
 
-This includes [service worker support](https://love2dev.com/blog/apple-ships-service-workers/).
+This includes [service worker support](https://love2dev.com/blog/apple-ships-service-workers/), shortcuts, theme_color, background_color, and more.
 
-Our PWA template currently does not support some PWA features like push notifications and app shortcuts.
+Our PWA template currently does not support some PWA features like push notifications.
 
 We'd be glad to accept PRs to add PWA functionality. Our goal is to make this template as close to a full-featured PWA as possible.
 
