@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,30 +21,31 @@
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0s-Fg-eGP" userLabel="Splash Background">
-                                        <rect key="frame" x="0.0" y="20" width="390" height="824"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p0s-Fg-eGP" userLabel="Splash Background">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <view contentMode="center" id="DIO-mU-n27" userLabel="Loading View">
-                                                <rect key="frame" x="45" y="263" width="300" height="300"/>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DIO-mU-n27" userLabel="Loading View">
+                                                <rect key="frame" x="94" y="323" width="200" height="200"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <imageView hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wifi.slash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TpV-I7-c6z">
-                                                        <rect key="frame" x="134" y="226.5" width="32" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="tintColor" systemColor="secondaryLabelColor"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4oa-LZ-pgs">
+                                                        <rect key="frame" x="66" y="70" width="69" height="61"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        <color key="tintColor" systemColor="secondarySystemFillColor"/>
+                                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                                     </imageView>
-                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="xSD-dq-HF9">
-                                                        <rect key="frame" x="92" y="201" width="108" height="8"/>
+                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.10000000000000001" id="xSD-dq-HF9">
+                                                        <rect key="frame" x="50" y="146" width="100" height="15"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                         {{PWABuilder.iOS.progressBarColor}}
                                                     </progressView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4oa-LZ-pgs">
-                                                        <rect key="frame" x="118" y="118" width="64" height="64"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <imageView hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wifi.slash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TpV-I7-c6z">
+                                                        <rect key="frame" x="85" y="159.33333333333314" width="31.999999999999886" height="30.000000000000085"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         {{PWABuilder.iOS.splashBgColor}}
-                                                        <color key="tintColor" systemColor="secondarySystemFillColor"/>
+                                                        <color key="tintColor" systemColor="secondaryLabelColor"/>
                                                     </imageView>
                                                 </subviews>
                                                 <viewLayoutGuide key="safeArea" id="a0B-Gx-0cO"/>
@@ -65,13 +66,13 @@
                         <outlet property="connectionProblemView" destination="TpV-I7-c6z" id="76F-WR-UnJ"/>
                         <outlet property="loadingView" destination="DIO-mU-n27" id="Wlk-Yd-6b1"/>
                         <outlet property="progressView" destination="xSD-dq-HF9" id="0jL-XR-Xwq"/>
-                        <outlet property="webviewView" destination="PHY-vp-dMl" id="qhH-E4-3lf"/>
                         <outlet property="splashBkgView" destination="p0s-Fg-eGP" id="fMY-qQ-Qid"/>
+                        <outlet property="webviewView" destination="PHY-vp-dMl" id="qhH-E4-3lf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1038.4615384615383" y="136.49289099526067"/>
+            <point key="canvasLocation" x="1036.9230769230769" y="135.07109004739337"/>
         </scene>
     </scenes>
     <resources>
