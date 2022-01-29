@@ -23,7 +23,9 @@ Unzip the `src` folder and open a terminal in `src` and execute the following co
 
 > 💁‍♂️ *Heads up*: 
 > 
-> If you get an error running `pod install`, you'll need to first run this command: `sudo gem install cocoapods`. Once completed, you can run `pod install`.
+> If you get an error running `pod install`, you'll need to first run this command: 
+>- Intel Macs: `sudo gem install cocoapods`. Once completed, you can run `pod install`.
+>- M1 Macs: `sudo gem uninstall cocoapods` followed by `brew install cocoapods`. Once completed, you can run `pod install`.
 
 Then, open the `src/[your PWA name].xcworkspace` file.
 
