@@ -26,6 +26,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let shortcutUrl = connectionOptions.shortcutItem?.type {            
             SceneDelegate.shortcutLinkToLaunch = URL.init(string: shortcutUrl)
         }
+        
+        // See if we were launched via scheme URL
+        if let schemeUrl = connectionOptions.urlContexts.first?.url {
+            // Convert scheme://url to a https://url
+            var comps = URLComponents(url: schemeUrl, resolvingAgainstBaseURL: false)
+            comps?.scheme = "https"
+            
+            if let url = comps?.url {
+                SceneDelegate.universalLinkToLaunch = url;
+            }
+        }
+    }
+    
+    // This function is called when our app is already running and the user clicks a custom scheme URL
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let scheme = URLContexts.first?.url {
+            // Convert scheme://url to a https://url and navigate to it
+            var comps = URLComponents(url: scheme, resolvingAgainstBaseURL: false)
+            comps?.scheme = "https"
+
+            if let url = comps?.url {
+                // Handle it inside our web view in a SPA-friendly way.
+                PWAShell.webView.evaluateJavaScript("location.href = '\(url)'")
+            }
+        }
     }
 
     // This function is called when our app is already running and the user clicks a universal link.
