@@ -4,13 +4,13 @@ Once you've packaged your PWA for iOS using [PWABuilder](https://www.pwabuilder.
 
 The process looks like this:
 
-1. Sign into your Apple Developer account
-2. Create a Bundle ID
-3. Create a certificate signing request (CSR)
-4. Create a new certificate
-5. Create a provisioning profile
-6. Create an app reservation
-7. Upload your app package
+1. [Sign into your Apple Developer account](#1-sign-into-your-apple-developer-account)
+2. [Create a Bundle ID](#2-create-your-bundle-id)
+3. [Create a certificate signing request (CSR)](#3-create-a-certificate-signing-request-csr)
+4. [Create a new certificate](#4-create-a-certificate)
+5. [Create a provisioning profile](#5-create-a-provisioning-profile)
+6. [Create an app reservation](#6-create-your-app-reservation)
+7. [Upload your app package](#7-upload-your-app-package)
 
 Each step is described below.
 
