@@ -1,4 +1,5 @@
 # PWABuilder iOS Platform
+Hey folks! Just wanted give the community an update on iOS support on PWABuilder and support within the communication channels. Due to the fact that iOS has very limited support for PWAs we will be supporting the iOS in a community driven fashion. This means that there will not be devs from the PWABuilder team maintaining and building out iOS functionality on the site or Discord. Responses will be 100% community driven. If you are interested in being an iOS champion DM me, would be happy to chat 🙂
 
 This is PWABuilder's iOS platform that generates an iOS app that loads your PWA in a WKWebView. The platform generates a zip file containing an Xcode project that you can compile on your Mac and publish to the App Store.
 
