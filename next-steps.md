@@ -45,7 +45,7 @@ See [Submit your PWA to the iOS App Store](/submit-to-app-store.md) for a step-b
 
 PWABuilder's iOS platform is in preview stage. While the PWABuilder team has tested this platform, including building and publishing real PWAs with it, there may be bugs or unexplored edge cases or missing features. 
 
-If you encount bugs or missing features, you can submit a PR to our [iOS code](https://github.com/pwa-builder/pwabuilder-ios/tree/main/Microsoft.PWABuilder.IOS.Web/Resources). Additionally, you can [open an issue](https://github.com/pwa-builder/pwabuilder/issues) to let us know about it.
+If you encounter bugs or missing features, you can submit a PR to our [iOS code](https://github.com/pwa-builder/pwabuilder-ios/tree/main/Microsoft.PWABuilder.IOS.Web/Resources). Additionally, you can [open an issue](https://github.com/pwa-builder/pwabuilder/issues) to let us know about it.
 
 ### Disclaimer: Apple's ambiguous stance on PWAs
 
