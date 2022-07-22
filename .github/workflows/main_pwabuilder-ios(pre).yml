@@ -23,6 +23,7 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
+        working-directory: ./Microsoft.PWABuilder.IOS.Web
         run: dotnet build --configuration Release
 
       - name: dotnet publish
