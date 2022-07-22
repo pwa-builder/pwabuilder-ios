@@ -27,6 +27,7 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
+        working-directory: ./Microsoft.PWABuilder.IOS.Web
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
