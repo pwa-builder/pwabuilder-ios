@@ -8,7 +8,7 @@ At runtime, your PWA will have a `app-platform` cookie. This cookie's value will
 
 No, not currently. You'll need Xcode to build your project, which is only available on Mac.
 
-In the near future, the PWABuilder team may automate the build process for you, in which case you'll be able to submit the package to the App Store without a Mac. If this is important to you, please [let us know](https://github.com/pwa-builder/PWABuilder/issues/new?assignees=&labels=enhancement%20%3Asparkles%3A,ios-platform&body=I%20would%20like%20to%20see%20PWABuilder%20iOS%20platform%20produce%20builds%20for%20me%20so%20that%20I%20do%20not%20need%20a%20Mac%20to%20build.&title=ios%20-%20build%20for%20me).
+In the near future, the PWABuilder team may automate the build process for you, in which case you'll be able to submit the package to the App Store without a Mac. If this is important to you, please upvote this [issue](https://github.com/pwa-builder/PWABuilder/issues/2436).
 
 In the meantime, there are 3rd party build services, such as [AppVeyor](https://www.appveyor.com/pricing/) or [GitHub Actions with Xcode Archive](https://github.com/marketplace/actions/xcode-archive), that can build Xcode projects as part of your continuous integration (CI) pipeline. 
 
