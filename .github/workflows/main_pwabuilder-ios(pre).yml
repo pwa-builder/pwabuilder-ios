@@ -6,7 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - pwabuilder-ios
 on:
   push:
     branches:
-      - debug
+      - main
   workflow_dispatch:
 
 jobs:
