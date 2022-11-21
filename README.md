@@ -3,6 +3,10 @@ Hey folks! Just wanted give the community an update on iOS support on PWABuilder
 
 This is PWABuilder's iOS platform that generates an iOS app that loads your PWA in a WKWebView. The platform generates a zip file containing an Xcode project that you can compile on your Mac and publish to the App Store.
 
+# Documentation
+If you're looking for more info on how to use PWABuilder to package for iOS, check out the documentation [here.](https://docs.pwabuilder.com/#/builder/app-store)
+
+There is also an [iOS FAQ](https://docs.pwabuilder.com/#/builder/faq?id=ios) available.
 # Architecture
 
 This is a C# web app that listens for requests to generate a PWA.
