@@ -234,7 +234,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             }
             catch (Exception fetchError)
             {
-                logger.LogWarning(fetchError, "Attempted to fetch image at {url}, but download failed with exception");
+                logger.LogWarning(fetchError, "Attempted to fetch image at {url}, but download failed with exception", imageUri);
                 return null;
             }
 
