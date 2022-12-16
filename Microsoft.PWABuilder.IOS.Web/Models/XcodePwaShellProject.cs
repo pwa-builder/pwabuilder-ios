@@ -178,8 +178,8 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             var oldDirName = "pwa-shell";
 
             GetFile("Podfile").Replace(oldDirName, macSafeProjectName);
-            GetFileByPath("project.xcworkspace\\contents.xcworkspacedata").Replace(oldDirName, macSafeProjectName);
-            GetFileByPath("pwa-shell.xcworkspace\\contents.xcworkspacedata").Replace(oldDirName, macSafeProjectName);
+            GetFileByPath("project.xcworkspace/contents.xcworkspacedata").Replace(oldDirName, macSafeProjectName);
+            GetFileByPath("pwa-shell.xcworkspace/contents.xcworkspacedata").Replace(oldDirName, macSafeProjectName);
             GetFile("pwa-shell.xcscheme").Replace(oldDirName, macSafeProjectName);
 
             // project.pbxproj has some references to the old directory name.
