@@ -159,7 +159,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
         private async Task<List<string>> TryWriteImageSourcesToDirectory(IEnumerable<ImageSource> sources, string outputDirectory)
         {
             var imageFilePaths = new List<string>(40);
-            var launchIconDirectory = Path.Combine(outputDirectory, "pwa-shell/Assets.xcassets//LaunchIcon.imageset");
+            var launchIconDirectory = Path.Combine(outputDirectory, Path.Combine("pwa-shell", "Assets.xcassets", "LaunchIcon.imageset"));
             foreach (var source in sources)
             {
                 var filePath = await TryWriteImageSourceToDirectory(source, outputDirectory);

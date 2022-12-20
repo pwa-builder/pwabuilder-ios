@@ -1,17 +1,16 @@
 ﻿using Microsoft.PWABuilder.IOS.Web.Common;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
+using System.IO;
 
 namespace Microsoft.PWABuilder.IOS.Web.Models
 {
-    /// <summary>
-    /// Models the pwa-shell Xcode project that serves as the template for generated PWA packages.
-    /// </summary>
-    public class XcodePwaShellProject : XcodeProject
+	/// <summary>
+	/// Models the pwa-shell Xcode project that serves as the template for generated PWA packages.
+	/// </summary>
+	public class XcodePwaShellProject : XcodeProject
     {
         private readonly IOSAppPackageOptions.Validated options;
         private readonly string macSafeProjectName;
@@ -178,8 +177,8 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             var oldDirName = "pwa-shell";
 
             GetFile("Podfile").Replace(oldDirName, macSafeProjectName);
-            GetFileByPath("project.xcworkspace/contents.xcworkspacedata").Replace(oldDirName, macSafeProjectName);
-            GetFileByPath("pwa-shell.xcworkspace/contents.xcworkspacedata").Replace(oldDirName, macSafeProjectName);
+            GetFileByPath(Path.Combine("project.xcworkspace", "contents.xcworkspacedata")).Replace(oldDirName, macSafeProjectName);
+            GetFileByPath(Path.Combine("pwa-shell.xcworkspace", "contents.xcworkspacedata")).Replace(oldDirName, macSafeProjectName);
             GetFile("pwa-shell.xcscheme").Replace(oldDirName, macSafeProjectName);
 
             // project.pbxproj has some references to the old directory name.
