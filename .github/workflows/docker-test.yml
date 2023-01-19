@@ -2,6 +2,7 @@
 name: Deploy to Preview
 
 on:
+  workflow_dispatch:
   push:
     branches: [ migration-and-fixes ]
   pull_request:
