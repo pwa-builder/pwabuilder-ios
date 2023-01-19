@@ -1,5 +1,5 @@
 
-name: Deploy to Preview
+name: Deploy Docker image to Container Registry
 
 on:
   workflow_dispatch:
