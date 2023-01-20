@@ -40,7 +40,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'net-7'
+      name: 'pre'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
