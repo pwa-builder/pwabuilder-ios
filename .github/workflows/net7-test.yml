@@ -54,6 +54,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'pwabuilder-ios'
-          slot-name: 'pre'
+          slot-name: 'net-7'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_30163B2E42ED4EE89DC9D0CA34064518 }}
           package: .
