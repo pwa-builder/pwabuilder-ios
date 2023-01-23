@@ -159,7 +159,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
         private async Task<List<string>> TryWriteImageSourcesToDirectory(IEnumerable<ImageSource> sources, string outputDirectory)
         {
             var imageFilePaths = new List<string>(40);
-            var launchIconDirectory = Path.Combine(outputDirectory, "pwa-shell\\Assets.xcassets\\LaunchIcon.imageset");
+            var launchIconDirectory = Path.Combine(outputDirectory, Path.Combine("pwa-shell", "Assets.xcassets", "LaunchIcon.imageset"));
             foreach (var source in sources)
             {
                 var filePath = await TryWriteImageSourceToDirectory(source, outputDirectory);
@@ -196,7 +196,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
                 (action: () => TryOpenZipEntry(source.GeneratedImageSource), description: source.GeneratedImageSource?.FullName)
             };
 
-            var appIconDirectory = Path.Combine(outputDirectory, "pwa-shell\\Assets.xcassets\\AppIcon.appiconset");
+            var appIconDirectory = Path.Combine(outputDirectory, "pwa-shell/Assets.xcassets/AppIcon.appiconset");
             foreach (var (action, description) in streamOpeners)
             {
                 using var stream = await action();
@@ -234,7 +234,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             }
             catch (Exception fetchError)
             {
-                logger.LogWarning(fetchError, "Attempted to fetch image at {url}, but download failed with exception");
+                logger.LogWarning(fetchError, "Attempted to fetch image at {url}, but download failed with exception", imageUri);
                 return null;
             }
 

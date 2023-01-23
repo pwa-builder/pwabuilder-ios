@@ -1,0 +1,12 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  microsoftpwabuilderiosweb:
+    image: microsoftpwabuilderiosweb
+    build:
+      context: .
+      dockerfile: Microsoft.PWABuilder.IOS.Web/Dockerfile
+    ports:
+      - 5000:5000
