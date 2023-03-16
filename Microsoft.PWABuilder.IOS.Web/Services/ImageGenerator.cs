@@ -196,7 +196,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
                 (action: () => TryOpenZipEntry(source.GeneratedImageSource), description: source.GeneratedImageSource?.FullName)
             };
 
-            var appIconDirectory = Path.Combine(outputDirectory, "pwa-shell/Assets.xcassets/AppIcon.appiconset");
+            var appIconDirectory = Path.Combine(outputDirectory, Path.Combine("pwa-shell", "Assets.xcassets", "AppIcon.appiconset"));
             foreach (var (action, description) in streamOpeners)
             {
                 using var stream = await action();
