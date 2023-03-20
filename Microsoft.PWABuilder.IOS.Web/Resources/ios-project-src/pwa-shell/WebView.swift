@@ -96,7 +96,7 @@ extension ViewController: WKUIDelegate {
     }
     // restrict navigation to target host, open external links in 3rd party apps
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if (navigationAction.request.url?.scheme == "about") {
+        if (navigationAction.request.url?.scheme == "about" || navigationAction.request.url?.scheme == "blob") {
             return decisionHandler(.allow)
         }
         if let requestUrl = navigationAction.request.url{
