@@ -51,7 +51,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
 
         public XcodeFile GetFile(string fileName)
         {
-            var file = this.files.SingleOrDefault(f => string.Equals(f.Name, fileName, StringComparison.OrdinalIgnoreCase));
+            var file = this.files.FirstOrDefault(f => string.Equals(f.Name, fileName, StringComparison.OrdinalIgnoreCase));
             if (file == null)
             {
                 throw new FileNotFoundException("Unable to find file " + fileName);
@@ -62,7 +62,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
 
         public XcodeFile GetFileByPath(string partialOrCompletePath)
         {
-            var file = this.files.SingleOrDefault(f => f.ItemPath.Contains(partialOrCompletePath, StringComparison.OrdinalIgnoreCase));
+            var file = this.files.FirstOrDefault(f => f.ItemPath.Contains(partialOrCompletePath, StringComparison.OrdinalIgnoreCase));
             if (file == null)
             {
                 throw new FileNotFoundException("Unable to find file with path " + partialOrCompletePath);
@@ -73,7 +73,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
 
         public XcodeFolder GetFolder(string folderName)
         {
-            var folder = this.folders.SingleOrDefault(f => string.Equals(f.Name, folderName, StringComparison.OrdinalIgnoreCase));
+            var folder = this.folders.FirstOrDefault(f => string.Equals(f.Name, folderName, StringComparison.OrdinalIgnoreCase));
             if (folder == null)
             {
                 throw new FileNotFoundException("Unable to find folder " + folder);
