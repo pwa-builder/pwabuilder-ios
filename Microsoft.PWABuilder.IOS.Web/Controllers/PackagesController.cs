@@ -30,16 +30,25 @@ namespace Microsoft.PWABuilder.IOS.Web.Controllers
         [HttpPost]
         public async Task<FileResult> Create(IOSAppPackageOptions options)
         {
+            AnalyticsInfo analyticsInfo = new();
+
+            if (HttpContext?.Request.Headers != null)
+            {
+                analyticsInfo.platformId = HttpContext.Request.Headers.TryGetValue("platform-identifier", out var id) ? id.ToString() : null;
+                analyticsInfo.platformIdVersion = HttpContext.Request.Headers.TryGetValue("platform-identifier-version", out var version) ? version.ToString() : null;
+                analyticsInfo.correlationId = HttpContext.Request.Headers.TryGetValue("correlation-id", out var corrId) ? corrId.ToString() : null;
+            }
+
             try
             {
                 var optionsValidated = ValidateOptions(options);
                 var packageBytes = await packageCreator.Create(optionsValidated);
-                analytics.Record(optionsValidated.Url.ToString(), success: true, error: null);
+                analytics.Record(optionsValidated.Url.ToString(), success: true, optionsValidated, analyticsInfo, error: null);
                 return File(packageBytes, "application/zip", $"{options.Name}-ios-app-package.zip");
             }
             catch (Exception error)
             {
-                analytics.Record(options.Url ?? "https://EMPTY_URL", success: false, error: error.ToString());
+                analytics.Record(options.Url ?? "https://EMPTY_URL", success: false, null, analyticsInfo, error: error.ToString());
                 throw;
             }
         }
