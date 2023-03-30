@@ -101,7 +101,7 @@ async function submit() {
         const response = await fetch("/packages/create", {
             method: "POST",
             body: options,
-            headers: new Headers({ 'content-type': 'application/json' }),
+            headers: new Headers({ 'content-type': 'application/json', 'platform-identifier': 'ServerUI', 'platform-identifier-version': '1.0.0' }),
         });
         if (response.status === 200) {
             const data = await response.blob();
