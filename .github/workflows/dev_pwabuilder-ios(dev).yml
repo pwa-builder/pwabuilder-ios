@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: microsoft/variable-substitution@v1 
         with:
-         files: '.Microsoft.PWABuilder.IOS.Web/appsettings.Production.json'
+         files: './Microsoft.PWABuilder.IOS.Web/appsettings.Production.json'
         env:
          AppSettings.ApplicationInsightsConnectionString: ${{secrets.APPLICATIONINSIGHTSCONNECTIONSTRING}}
       - name: Set up .NET Core
