@@ -14,8 +14,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3
+      - uses: microsoft/variable-substitution@v1 
+        with:
+         files: './Microsoft.PWABuilder.IOS.Web/appsettings.Production.json'
+        env:
+         AppSettings.ApplicationInsightsConnectionString: ${{secrets.APPLICATIONINSIGHTSCONNECTIONSTRING}}
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
