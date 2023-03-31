@@ -1,3 +1,4 @@
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,8 @@ namespace Microsoft.PWABuilder.IOS.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var appSettings = Configuration.GetSection("AppSettings");
+            var aiOptions = setUpAppInsights(appSettings);
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddCors(options =>
             {
@@ -49,6 +52,7 @@ namespace Microsoft.PWABuilder.IOS.Web
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Microsoft.PWABuilder.IOS.Web", Version = "v1" });
             });
+            services.AddApplicationInsightsTelemetry(aiOptions);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,6 +92,22 @@ namespace Microsoft.PWABuilder.IOS.Web
                 "https://nice-field-047c1420f.azurestaticapps.net"
             };
             return allowedOrigins.Any(o => origin.Contains(o, StringComparison.OrdinalIgnoreCase));
+        }
+
+        static ApplicationInsightsServiceOptions setUpAppInsights(IConfigurationSection appSettings)
+        {
+            var connectionString = appSettings["ApplicationInsightsConnectionString"];
+            var aiOptions = new ApplicationInsightsServiceOptions();
+            aiOptions.EnableRequestTrackingTelemetryModule = false;
+            aiOptions.EnableDependencyTrackingTelemetryModule = true;
+            aiOptions.EnableHeartbeat = false;
+            aiOptions.EnableAzureInstanceMetadataTelemetryModule = false;
+            aiOptions.EnableActiveTelemetryConfigurationSetup = false;
+            aiOptions.EnableAdaptiveSampling = false;
+            aiOptions.EnableAppServicesHeartbeatTelemetryModule = false;
+            aiOptions.EnableAuthenticationTrackingJavaScript = false;
+            aiOptions.ConnectionString = connectionString;
+            return aiOptions;
         }
     }
 }
