@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.PWABuilder.IOS.Web.Common;
+using System.Net;
 
 namespace Microsoft.PWABuilder.IOS.Web.Services
 {
@@ -30,7 +31,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             IOptions<AppSettings> appSettings,
             ILogger<ImageGenerator> logger)
         {
-            this.http = httpClientFactory.CreateClient();
+            this.http = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All });
             this.http.AddLatestEdgeUserAgent();
             this.imageGeneratorServiceUrl = new Uri(appSettings.Value.ImageGeneratorApiUrl);
             this.logger = logger;
