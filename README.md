@@ -17,11 +17,19 @@ The iOS PWA template code is located in [/Microsoft.PWABuilder.IOS.Web/Resources
 
 The code is a fork of https://github.com/khmyznikov/ios-pwa-wrap, licensed under [The Unlicense](https://unlicense.org/). A big thanks to Gleb for permitting PWABuilder to to use, fork, and improve on his PWA template.
 
-# Running locally
+### Running Locally
 
-Open the solution in Visual Studio and hit F5 to run. https://localhost:44314 will open with a page allowing you to test the service.
+You will need [Docker](https://www.docker.com/products/docker-desktop/) and the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) to run this service locally.
 
-You may also generate a package manually by POSTing to `/packages/create` with the following JSON body:
+Steps:
+
+1. Run `az acr login -n pwabuilder` to authenticate with our Azure Container Registry.
+
+2. Run `docker-compose up` to start the service.
+
+3. Visit `localhost:5000` to see the iOS packaging testing interface.
+
+Alternately, you can POST to `/packages/create` with the following JSON body:
 
 ```json
 {
