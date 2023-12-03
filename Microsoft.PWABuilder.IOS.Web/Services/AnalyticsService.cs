@@ -31,7 +31,14 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             this.http = httpClientFactory.CreateClient();
             this.logger = logger;
             this.telemetryClient = telemetryClient;
-            !string.IsNullOrEmpty(this.settings.Value.ApplicationInsightsConnectionString);
+            if (!string.IsNullOrEmpty(this.settings.Value.ApplicationInsightsConnectionString))
+            {
+                this.isAppInsightsEnabled = true;
+            }
+            else
+            {
+                this.isAppInsightsEnabled = false;
+            }
         }
 
         public void Record(string url, bool success, IOSAppPackageOptions.Validated? packageOptions, AnalyticsInfo? analyticsInfo, string? error)
@@ -74,10 +81,6 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
                 {
                     record.Add("PlatformVersion", analyticsInfo.platformIdVersion);
                 }
-            }
-            if(analyticsInfo?.referrer != null)
-            {
-                record.Add("Referrer", analyticsInfo.referrer);
             }
             telemetryClient.TrackEvent(name, record);
             ;
