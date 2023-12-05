@@ -15,7 +15,7 @@ When a request comes in, it creates a copy of the iOS PWA template code, modifie
 
 The iOS PWA template code is located in [/Microsoft.PWABuilder.IOS.Web/Resources](https://github.com/pwa-builder/pwabuilder-ios/tree/main/Microsoft.PWABuilder.IOS.Web/Resources).
 
-The code is a fork of https://github.com/khmyznikov/ios-pwa-wrap, licensed under [The Unlicense](https://unlicense.org/). A big thanks to Gleb for permitting PWABuilder to to use, fork, and improve on his PWA template.
+The code is a fork of https://github.com/khmyznikov/ios-pwa-wrap, licensed under [The Unlicense](https://unlicense.org/). A big thanks to Gleb for permitting PWABuilder to use, fork, and improve on his PWA template.
 
 # Running locally
 
