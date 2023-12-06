@@ -34,7 +34,13 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     webView.customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1";    
     webView.scrollView.contentInsetAdjustmentBehavior = .never
     webView.addObserver(NSO, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: NSKeyValueObservingOptions.new, context: nil)
-    
+
+#if DEBUG
+    if #available(iOS 16.4, *) {
+        webView.isInspectable = true
+    }
+#endif
+
     return webView
 }
 
