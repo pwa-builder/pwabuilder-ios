@@ -5,7 +5,7 @@ import SafariServices
 
 
 func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNavigationDelegate, NSO: NSObject, VC: ViewController) -> WKWebView{
-    
+
     let config = WKWebViewConfiguration()
     let userContentController = WKUserContentController()
 
@@ -14,15 +14,15 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     userContentController.add(WKSMH, name: "push-permission-request")
     userContentController.add(WKSMH, name: "push-permission-state")
     config.userContentController = userContentController
-    
+
     if #available(iOS 14, *) {
         config.limitsNavigationsToAppBoundDomains = true;
-        
+
     }
     config.preferences.javaScriptCanOpenWindowsAutomatically = true
     config.allowsInlineMediaPlayback = true
     config.preferences.setValue(true, forKey: "standalone")
-    
+
     let webView = WKWebView(frame: calcWebviewFrame(webviewView: container, toolbarView: nil), configuration: config)
     setCustomCookie(webView: webView)
     webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -31,7 +31,7 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     webView.scrollView.bounces = false;
     webView.allowsBackForwardNavigationGestures = true
     webView.configuration.applicationNameForUserAgent = "Safari/604.1" // See https://github.com/pwa-builder/pwabuilder-ios/issues/30
-    webView.customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1";    
+    webView.customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1";
     webView.scrollView.contentInsetAdjustmentBehavior = .never
     webView.addObserver(NSO, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: NSKeyValueObservingOptions.new, context: nil)
 
@@ -72,7 +72,7 @@ func calcWebviewFrame(webviewView: UIView, toolbarView: UIToolbar?) -> CGRect{
         let winScene = UIApplication.shared.connectedScenes.first
         let windowScene = winScene as! UIWindowScene
         var statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 0
-        
+
         switch displayMode {
         case "fullscreen":
             #if targetEnvironment(macCatalyst)
@@ -107,6 +107,17 @@ extension ViewController: WKUIDelegate {
         }
         if let requestUrl = navigationAction.request.url{
             if let requestHost = requestUrl.host {
+                // NOTE: Match auth origin first, because host origin may be a subset of auth origin and may therefore always match
+                let matchingAuthOrigin = authOrigins.first(where: { requestHost.range(of: $0) != nil })
+                if (matchingAuthOrigin != nil) {
+                    decisionHandler(.allow)
+                    if (toolbarView.isHidden) {
+                        toolbarView.isHidden = false
+                        webView.frame = calcWebviewFrame(webviewView: webviewView, toolbarView: toolbarView)
+                    }
+                    return
+                }
+
                 let matchingHostOrigin = allowedOrigins.first(where: { requestHost.range(of: $0) != nil })
                 if (matchingHostOrigin != nil) {
                     // Open in main webview
@@ -115,42 +126,31 @@ extension ViewController: WKUIDelegate {
                         toolbarView.isHidden = true
                         webView.frame = calcWebviewFrame(webviewView: webviewView, toolbarView: nil)
                     }
-                    
-                } else {
-                    let matchingAuthOrigin = authOrigins.first(where: { requestHost.range(of: $0) != nil })
-                    if (matchingAuthOrigin != nil) {
-                        decisionHandler(.allow)
-                        if (toolbarView.isHidden) {
-                            toolbarView.isHidden = false
-                            webView.frame = calcWebviewFrame(webviewView: webviewView, toolbarView: toolbarView)
-                        }
-                        return
-                    }
-                    else {
-                        if (navigationAction.navigationType == .other &&
-                            navigationAction.value(forKey: "syntheticClickType") as! Int == 0 &&
-                            (navigationAction.targetFrame != nil)
-                        ) {
-                            decisionHandler(.allow)
-                            return
-                        }
-                        else {
-                            decisionHandler(.cancel)
-                        }
-                    }
-                    
+                    return
+                }
+                if (navigationAction.navigationType == .other &&
+                    navigationAction.value(forKey: "syntheticClickType") as! Int == 0 &&
+                    (navigationAction.targetFrame != nil) &&
+                    // no error here, fake warning
+                    (navigationAction.sourceFrame != nil)
+                ) {
+                    decisionHandler(.allow)
+                    return
+                }
+                else {
+                    decisionHandler(.cancel)
+                }
 
-                    if ["http", "https"].contains(requestUrl.scheme?.lowercased() ?? "") {
-                         // Can open with SFSafariViewController
-                         let safariViewController = SFSafariViewController(url: requestUrl)
-                         self.present(safariViewController, animated: true, completion: nil)
-                     } else {
-                         // Scheme is not supported or no scheme is given, use openURL
-                        if (UIApplication.shared.canOpenURL(requestUrl)) {
-                            UIApplication.shared.open(requestUrl)
-                        }
-                     }
-                    
+
+                if ["http", "https"].contains(requestUrl.scheme?.lowercased() ?? "") {
+                    // Can open with SFSafariViewController
+                    let safariViewController = SFSafariViewController(url: requestUrl)
+                    self.present(safariViewController, animated: true, completion: nil)
+                } else {
+                    // Scheme is not supported or no scheme is given, use openURL
+                    if (UIApplication.shared.canOpenURL(requestUrl)) {
+                        UIApplication.shared.open(requestUrl)
+                    }
                 }
             } else {
                 decisionHandler(.cancel)
@@ -164,14 +164,14 @@ extension ViewController: WKUIDelegate {
         else {
             decisionHandler(.cancel)
         }
-        
+
     }
     // Handle javascript: `window.alert(message: String)`
     func webView(_ webView: WKWebView,
         runJavaScriptAlertPanelWithMessage message: String,
         initiatedByFrame frame: WKFrameInfo,
         completionHandler: @escaping () -> Void) {
-        
+
         // Set the message as the UIAlertController message
         let alert = UIAlertController(
             title: nil,
@@ -205,7 +205,7 @@ extension ViewController: WKUIDelegate {
             message: message,
             preferredStyle: .alert
         )
-        
+
         // Add a confirmation action “Cancel”
         let cancelAction = UIAlertAction(
             title: "Cancel",
@@ -215,7 +215,7 @@ extension ViewController: WKUIDelegate {
                 completionHandler(false)
             }
         )
-        
+
         // Add a confirmation action “OK”
         let okAction = UIAlertAction(
             title: "OK",
@@ -244,7 +244,7 @@ extension ViewController: WKUIDelegate {
             message: prompt,
             preferredStyle: .alert
         )
-        
+
         // Add a confirmation action “Cancel”
         let cancelAction = UIAlertAction(
             title: "Cancel",
@@ -254,7 +254,7 @@ extension ViewController: WKUIDelegate {
                 completionHandler(nil)
             }
         )
-        
+
         // Add a confirmation action “OK”
         let okAction = UIAlertAction(
             title: "OK",
@@ -266,7 +266,7 @@ extension ViewController: WKUIDelegate {
                 }
             }
         )
-        
+
         alert.addTextField { textField in
             textField.placeholder = defaultText
         }
