@@ -37,6 +37,7 @@ namespace Microsoft.PWABuilder.IOS.Web.Controllers
                 analyticsInfo.platformId = HttpContext.Request.Headers.TryGetValue("platform-identifier", out var id) ? id.ToString() : null;
                 analyticsInfo.platformIdVersion = HttpContext.Request.Headers.TryGetValue("platform-identifier-version", out var version) ? version.ToString() : null;
                 analyticsInfo.correlationId = HttpContext.Request.Headers.TryGetValue("correlation-id", out var corrId) ? corrId.ToString() : null;
+                analyticsInfo.referrer = HttpContext.Request.Query.TryGetValue("ref", out var referrer) ? referrer.ToString() : null;
             }
 
             try
