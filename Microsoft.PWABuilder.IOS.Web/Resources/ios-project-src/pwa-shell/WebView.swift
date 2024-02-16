@@ -130,7 +130,9 @@ extension ViewController: WKUIDelegate {
                 }
                 if (navigationAction.navigationType == .other &&
                     navigationAction.value(forKey: "syntheticClickType") as! Int == 0 &&
-                    (navigationAction.targetFrame != nil)
+                    (navigationAction.targetFrame != nil) &&
+                    // no error here, fake warning
+                    (navigationAction.sourceFrame != nil)
                 ) {
                     decisionHandler(.allow)
                     return
