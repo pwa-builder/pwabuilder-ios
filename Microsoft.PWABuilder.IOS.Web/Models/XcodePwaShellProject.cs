@@ -42,15 +42,15 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             var mainStoryboard = GetFile("Main.storyboard");
 
             // Set the splash color.
-            var existingSplashColorLine = "{{PWABuilder.iOS.splashBgColor}}";
-            var desiredSplashColorLine = $"<color key=\"backgroundColor\" {options.SplashColor.ToStoryboardColorString()} alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
-            launchScreenStoryboard.Replace(existingSplashColorLine, desiredSplashColorLine);
-            mainStoryboard.Replace(existingSplashColorLine, desiredSplashColorLine);
+            // var existingSplashColorLine = "{{PWABuilder.iOS.splashBgColor}}";
+            // var desiredSplashColorLine = $"<color key=\"backgroundColor\" {options.SplashColor.ToStoryboardColorString()} alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
+            // launchScreenStoryboard.Replace(existingSplashColorLine, desiredSplashColorLine);
+            // mainStoryboard.Replace(existingSplashColorLine, desiredSplashColorLine);
 
             // Set the status bar color
-            var existingStatusBarColorLine = "{{PWABuilder.iOS.statusBarColor}}";
-            var desiredStatusBarColorLine = $"<color key=\"backgroundColor\" {options.StatusBarColor.ToStoryboardColorString()} alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
-            mainStoryboard.Replace(existingStatusBarColorLine, desiredStatusBarColorLine);
+            // var existingStatusBarColorLine = "{{PWABuilder.iOS.statusBarColor}}";
+            // var desiredStatusBarColorLine = $"<color key=\"backgroundColor\" {options.StatusBarColor.ToStoryboardColorString()} alpha=\"1\" colorSpace=\"custom\" customColorSpace=\"sRGB\"/>";
+            // mainStoryboard.Replace(existingStatusBarColorLine, desiredStatusBarColorLine);
 
             // Set the progress var color
             var existingProgressBarColorLine = "{{PWABuilder.iOS.progressBarColor}}";
