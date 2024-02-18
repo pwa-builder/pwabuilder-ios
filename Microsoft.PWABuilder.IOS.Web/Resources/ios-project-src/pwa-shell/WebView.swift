@@ -110,9 +110,13 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
     }
     // restrict navigation to target host, open external links in 3rd party apps
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if (navigationAction.request.url?.scheme == "about" || navigationAction.request.url?.scheme == "blob") {
+        if (navigationAction.request.url?.scheme == "about") {
             return decisionHandler(.allow)
         }
+        if (navigationAction.shouldPerformDownload || navigationAction.request.url?.scheme == "blob") {
+            return decisionHandler(.download)
+        }
+
         if let requestUrl = navigationAction.request.url{
             if let requestHost = requestUrl.host {
                 // NOTE: Match auth origin first, because host origin may be a subset of auth origin and may therefore always match
@@ -161,25 +165,20 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
                     }
                 }
             } else {
-                if navigationAction.request.url?.scheme == "blob" {
-                    decisionHandler(.download)
+                decisionHandler(.cancel)
+                if (navigationAction.request.url?.scheme == "tel" || navigationAction.request.url?.scheme == "mailto" ){
+                    if (UIApplication.shared.canOpenURL(requestUrl)) {
+                        UIApplication.shared.open(requestUrl)
+                    }
                 }
                 else {
-                    decisionHandler(.cancel)
-                    if (navigationAction.request.url?.scheme == "tel" || navigationAction.request.url?.scheme == "mailto" ){
-                        if (UIApplication.shared.canOpenURL(requestUrl)) {
-                            UIApplication.shared.open(requestUrl)
-                        }
+                    if requestUrl.isFileURL {
+                        // not tested
+                        downloadAndOpenFile(url: requestUrl.absoluteURL)
                     }
-                    else {
-                        if requestUrl.isFileURL {
-                            // not tested
-                            downloadAndOpenFile(url: requestUrl.absoluteURL)
-                        }
-                        if (requestUrl.absoluteString.contains("base64")){
-                            downloadAndOpenBase64File(base64String: requestUrl.absoluteString)
-                        }
-                    }
+                    // if (requestUrl.absoluteString.contains("base64")){
+                    //     downloadAndOpenBase64File(base64String: requestUrl.absoluteString)
+                    // }
                 }
             }
         }
@@ -323,31 +322,31 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
         task.resume()
     }
 
-    func downloadAndOpenBase64File(base64String: String) {
-        // Split the base64 string to extract the data and the file extension
-        let components = base64String.components(separatedBy: ";base64,")
+    // func downloadAndOpenBase64File(base64String: String) {
+    //     // Split the base64 string to extract the data and the file extension
+    //     let components = base64String.components(separatedBy: ";base64,")
 
-        // Make sure the base64 string has the correct format
-        guard components.count == 2, let format = components.first?.split(separator: "/").last else {
-            print("Invalid base64 string format")
-            return
-        }
+    //     // Make sure the base64 string has the correct format
+    //     guard components.count == 2, let format = components.first?.split(separator: "/").last else {
+    //         print("Invalid base64 string format")
+    //         return
+    //     }
 
-        // Remove the data type prefix to get the base64 data
-        let dataString = components.last!
+    //     // Remove the data type prefix to get the base64 data
+    //     let dataString = components.last!
 
-        if let imageData = Data(base64Encoded: dataString) {
-            let documentsUrl: URL  =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let destinationFileUrl = documentsUrl.appendingPathComponent("image.\(format)")
+    //     if let imageData = Data(base64Encoded: dataString) {
+    //         let documentsUrl: URL  =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    //         let destinationFileUrl = documentsUrl.appendingPathComponent("image.\(format)")
 
-            do {
-                try imageData.write(to: destinationFileUrl)
-                self.openFile(url: destinationFileUrl)
-            } catch {
-                print("Error writing image to file url: \(destinationFileUrl): \(error)")
-            }
-        }
-    }
+    //         do {
+    //             try imageData.write(to: destinationFileUrl)
+    //             self.openFile(url: destinationFileUrl)
+    //         } catch {
+    //             print("Error writing image to file url: \(destinationFileUrl): \(error)")
+    //         }
+    //     }
+    // }
 
     func openFile(url: URL) {
         self.documentController = UIDocumentInteractionController(url: url)
