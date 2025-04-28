@@ -365,6 +365,11 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsPath.appendingPathComponent(suggestedFilename)
 
+        // Remove existing file if it exists, otherwise it may show an old file/content just by having the same name.
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            try? FileManager.default.removeItem(at: fileURL)
+        }
+
         self.openFile(url: fileURL)
         completionHandler(fileURL)
     }
