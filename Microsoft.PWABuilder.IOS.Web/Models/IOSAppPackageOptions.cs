@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Microsoft.PWABuilder.IOS.Web.Models
@@ -116,19 +117,22 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
                 .Where(url => url != null)
                 .Select(url => url!)
                 .ToList();
+            var name = ReplaceSpecialCharacters(Name).Trim();
+            var bundleId = ReplaceSpecialCharacters(BundleId).Trim();
+
             return new Validated(
-                Name.Trim(), 
-                BundleId.Trim(),
-                uri, 
-                imageUri, 
-                validSplashColor, 
-                validProgressColor, 
-                validStatusBarColor, 
-                permittedUris, 
+                name,
+                bundleId,
+                uri,
+                imageUri,
+                validSplashColor,
+                validProgressColor,
+                validStatusBarColor,
+                permittedUris,
                 Manifest,
                 manifestUri);
         }
-   
+
         private static Color GetValidColor(string? desiredColor, string? manifestColor, string fallbackColor)
         {
             var colors = new[] { desiredColor?.Trim(), manifestColor?.Trim(), fallbackColor };
@@ -158,16 +162,26 @@ namespace Microsoft.PWABuilder.IOS.Web.Models
             return null;
         }
 
+        private static string ReplaceSpecialCharacters(string option)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            byte[] bytes = Encoding.GetEncoding("Cyrillic").GetBytes(option);
+            string parsedOption = Encoding.ASCII.GetString(bytes);
+
+            return parsedOption;
+        }
+
         public record Validated(
-            string Name, 
+            string Name,
             string BundleId,
-            Uri Url, 
-            Uri ImageUri, 
-            Color SplashColor, 
-            Color ProgressBarColor, 
-            Color StatusBarColor, 
-            List<Uri> PermittedUrls, 
-            WebAppManifest Manifest, 
+            Uri Url,
+            Uri ImageUri,
+            Color SplashColor,
+            Color ProgressBarColor,
+            Color StatusBarColor,
+            List<Uri> PermittedUrls,
+            WebAppManifest Manifest,
             Uri ManifestUri);
     }
 }
