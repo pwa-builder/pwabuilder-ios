@@ -41,6 +41,9 @@ jobs:
 
   deploy:
     runs-on: windows-latest
+    permissions: 
+      id-token: write
+      contents: read
     needs: build
     environment:
       name: 'pre'
