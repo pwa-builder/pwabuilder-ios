@@ -12,27 +12,22 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    permissions:
+      contents: read 
 
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/variable-substitution@v1 
-        with:
-         files: './Microsoft.PWABuilder.IOS.Web/appsettings.Production.json'
-        env:
-         AppSettings.ApplicationInsightsConnectionString: ${{secrets.APPLICATIONINSIGHTSCONNECTIONSTRING}}
+
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '7.x'
-          include-prerelease: true
 
       - name: Build with dotnet
-        working-directory: ./Microsoft.PWABuilder.IOS.Web
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        working-directory: ./Microsoft.PWABuilder.IOS.Web
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -42,22 +37,20 @@ jobs:
 
   deploy:
     runs-on: windows-latest
-    permissions: 
-      id-token: write
-      contents: read
     needs: build
-    environment:
-      name: 'dev'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-          
-      - name: Authenticate to Azure
-        uses: azure/login@v1
+      
+      - name: Login to Azure
+        uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_APP_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -65,8 +58,9 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'pwabuilder-ios'
           slot-name: 'dev'
           package: .
+          
