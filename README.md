@@ -7,6 +7,7 @@ This is PWABuilder's iOS platform that generates an iOS app that loads your PWA 
 If you're looking for more info on how to use PWABuilder to package for iOS, check out the documentation [here.](https://docs.pwabuilder.com/#/builder/app-store)
 
 There is also an [iOS FAQ](https://docs.pwabuilder.com/#/builder/faq?id=ios) available.
+
 # Architecture
 
 This is a C# web app that listens for requests to generate a PWA.
@@ -116,3 +117,9 @@ Alternately, you can POST to `/packages/create` with the following JSON body:
 For more information about the JSON arguments, see [IOSPackageOptions](https://github.com/pwa-builder/pwabuilder-ios/blob/main/Microsoft.PWABuilder.IOS.Web/Models/IOSAppPackageOptions.cs).
 
 The response will be a zip file containing the generated app solution, which can be compiled in Xcode.
+
+# Deployment
+
+Checkins to main branch will trigger automatic deployment to [pwabuilder-ios staging](pwabuilder-ios-staging.azurewebsites.net).
+
+To deploy to production, swap staging and production slots.
