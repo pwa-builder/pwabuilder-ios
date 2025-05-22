@@ -128,7 +128,11 @@ namespace Microsoft.PWABuilder.IOS.Web.Services
             };
 
             var imagesResponse = await this.http.PostAsync(imageGeneratorServiceUrl, imageGeneratorArgs);
-            imagesResponse.EnsureSuccessStatusCode();
+            if (!imagesResponse.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Image generator service call failed with status {(int)imagesResponse.StatusCode} ({imagesResponse.StatusCode}): {imagesResponse.ReasonPhrase}");
+            }
+
             var imagesResponseString = await imagesResponse.Content.ReadAsStringAsync(); // it should be a JSON string containing a ImageGeneratorServiceResult
             var imagesResult = JsonSerializer.Deserialize<ImageGeneratorServiceResult>(imagesResponseString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             if (imagesResult == null)
